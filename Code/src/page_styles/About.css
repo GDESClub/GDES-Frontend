@@ -12,7 +12,9 @@
   content: "";
   position: absolute;
   inset: 0;
+  background-image: url('../assets/about_background.png'); 
   background: rgba(0, 0, 0, 0.5);
+  opacity: 0.6;
   z-index: -1;
 }
 

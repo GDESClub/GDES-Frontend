@@ -8,7 +8,7 @@ import '../page_styles/About.css';
 
 function AboutPage(){
     return(
-        <div>
+        <div className="AboutPage">
             <Navbar/>
             About Page.
             <AboutSection />
