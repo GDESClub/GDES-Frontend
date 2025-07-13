@@ -1,20 +1,18 @@
-.LeaderboardPage {
+.AboutPage {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-image: url('../assets/leaderboard_background.png'); /* Replace with your image path */
+  background-image: url('../assets/about_background.png'); 
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  color: #ECF5FF;
 }
 
-/* Optional: add a semi-transparent overlay for contrast */
-.LeaderboardPage::before {
+.AboutPage::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6); /* adjust darkness */
+  background: rgba(0, 0, 0, 0.5);
   z-index: -1;
 }
 

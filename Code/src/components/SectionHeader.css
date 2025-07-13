@@ -1,0 +1,21 @@
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-header h2 {
+    color: #A8A2FF;
+    font-family: Tektur, sans-serif;
+    font-size: 48px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    text-shadow: 0 0 8px rgba(149, 246, 255, 0);
+}
+
+.circle-icon {
+  fill: none;
+  stroke: #79FFB6;
+  filter: drop-shadow(0 0 4px #79FFB6);
+}
