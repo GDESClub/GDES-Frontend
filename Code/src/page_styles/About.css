@@ -2,25 +2,19 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-image: url('../assets/about_background.png'); 
+  background-image: url('../assets/image.png'); /* Replace with your image path */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  color: #ECF5FF;
 }
+
+
 
 .AboutPage::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url('../assets/about_background.png'); 
-  background: rgba(0, 0, 0, 0.5);
-  opacity: 0.6;
+  background: rgba(0, 0, 0, 0.6); /* adjust darkness */
   z-index: -1;
-}
-
-main {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  padding: 2rem;
 }
