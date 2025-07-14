@@ -6,7 +6,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: #000;
+  background-color: #151515; 
 }
 
 
@@ -15,6 +15,5 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6); /* adjust darkness */
   z-index: -1;
 }
