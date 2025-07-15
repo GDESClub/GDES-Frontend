@@ -10,7 +10,6 @@ function AboutPage(){
     return(
         <div className="AboutPage">
             <Navbar/>
-            About Page.
             <AboutSection />
             <MembersSection />
             <CreditsSection />

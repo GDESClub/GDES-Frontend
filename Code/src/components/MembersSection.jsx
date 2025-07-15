@@ -11,7 +11,9 @@ const MembersSection = () => (
     <div className="member-cards-container">
       {members.map((member, index) => (
         <div className="member-card" key={index}>
-          <div className="member-icon" />
+          <svg width="118" height="118" viewBox="0 0 118 118" fill="none" xmlns="http://www.w3.org/2000/svg" className='member-box'>
+            <path d="M74.7041 0.5L117.5 43.2959V117.5H0.5V0.5H74.7041Z" stroke="#A8A2FF" />
+          </svg>
           <div className="member-info">
             <p>{member.name}</p>
             <span>{member.role}</span>
