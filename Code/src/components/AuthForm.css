@@ -1,0 +1,187 @@
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  max-width: 500px;
+  box-sizing: border-box;
+}
+
+.auth-form h2 {
+  font-family: 'Tektur', sans-serif;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 150%;
+  color: #79FFB6;
+  margin-bottom: 40px;
+}
+
+
+.auth-input-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 30px;
+}
+
+.auth-input-block label {
+  font-family: 'Neue Montreal', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #79FFB6;
+  margin-bottom: 8px;
+}
+
+/* Small input blocks for recovery email/phone */
+.auth-input-block.small-input-block {
+  align-items: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.auth-input-block.small-input-block label {
+  text-align: center;
+  width: 100%;
+}
+
+/* Make two small input boxes closer */
+.auth-input-block.small-input-block + .auth-input-block.small-input-block {
+  margin-top: -15px;
+}
+
+/* Input styling */
+.custom-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.custom-input-wrapper svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: filter 0.2s;
+}
+
+.custom-input-wrapper input {
+  position: absolute;
+  top: 50%;
+  left: 3%;
+  transform: translateY(-50%);
+  width: 80%;
+  height: 70%;
+  background: transparent;
+  border: none;
+  color: white;
+  font-family: 'Neue Montreal', sans-serif;
+  font-size: 16px;
+  outline: none;
+}
+
+/* Glow when input inside is focused */
+.custom-input-wrapper input:focus + svg,
+.custom-input-wrapper:has(input:focus) svg {
+  filter: drop-shadow(6px 6px 6px #82f7b6);
+}
+
+/* Small input wrapper specifically narrower */
+.custom-input-wrapper.small-input {
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+.custom-button-wrapper {
+  position: relative;
+  width: 234px;
+  height: 34px;
+  margin: 50px auto 0 auto;
+  cursor: pointer;
+}
+
+.custom-button-wrapper svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 234px;
+  height: 34px;
+  transition: filter 0.3s;
+}
+
+.custom-button-wrapper button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 234px;
+  height: 34px;
+  background: transparent;
+  border: none;
+  font-family: 'Neue Montreal', sans-serif;
+  font-size: 16px;
+  color: #0E0216;
+  cursor: pointer;
+}
+
+/* Glow on hover */
+.custom-button-wrapper:hover svg {
+  filter: drop-shadow(0 0 6px #79ffb588);
+}
+
+/* Switch link block */
+.switch-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.switch-link span:first-child {
+  font-family: 'Neue Montreal', sans-serif;
+  font-size: 16px;
+  color: #79FFB6;
+}
+
+.switch-link span:last-child {
+  font-family: 'Neue Montreal', sans-serif;
+  font-size: 16px;
+  color: #79FFB6;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+.switch-link span:last-child:hover {
+  color: #A0FFD5; /* slightly lighter neon green */
+  text-shadow: 0 0 4px #79ffb596;
+}
+
+/* Variant specific tweaks */
+.auth-form.login {
+  justify-content: center;
+}
+
+.auth-form.signup {
+  justify-content: flex-start; 
+}
+
+/* .auth-form.signup .auth-input-block.small-input-block {
+  margin-top: 30px; /* closer to other fields in signup 
+} */
+
+.auth-form.login .switch-link {
+  margin-top: 80px;
+}
+
+.auth-form.login .switch-link span:first-child{
+  margin-bottom: 15px;
+}
+
+.auth-form.signup .switch-link {
+  margin-top: 40px;
+}
+
+.auth-form.signup .switch-link span:first-child{
+  margin-bottom: 8px;
+}
+

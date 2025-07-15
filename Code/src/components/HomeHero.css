@@ -1,0 +1,76 @@
+.home-hero {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 51px; 
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+}
+
+/* TITLE */
+.hero-title {
+    font-family: 'Tektur', sans-serif;
+    font-weight: 400;
+    font-size: 128px;
+    line-height: 1.5; 
+    letter-spacing: 0.13em;
+    color: #79FFB6;
+    max-width: 748px; 
+    text-align: left;
+    white-space: nowrap;
+    margin: 0;
+}
+
+/* DESCRIPTION */
+.hero-description {
+    font-family: 'Neue Montreal', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: -0.18px;
+    margin-top: 24px;
+    max-width: 657px;
+    color: #EAEAEA;
+}
+
+/* READ MORE LINK */
+.hero-readmore {
+    font-family: 'Neue Montreal', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: -0.18px;
+    color: #EAEAEA;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-top: 12px;
+    display: inline-block;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .home-hero {
+        height: auto;
+        padding: 40px 20px;
+        align-items: center;
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: 64px;
+        line-height: 120%;
+        letter-spacing: 8px;
+        max-width: 90%;
+        white-space: normal;
+    }
+
+    .hero-description,
+    .hero-readmore {
+        font-size: 14px;
+        max-width: 90%;
+    }
+}
