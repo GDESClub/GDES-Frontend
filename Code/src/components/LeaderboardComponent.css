@@ -1,28 +1,29 @@
-
-
 .LeaderboardComponent {
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 20px;
     width: 100%;
-    padding: 20px 0;
+    padding: 40px 0;
     font-family: "Neue Montreal", sans-serif;
-    margin-bottom: 100px;
 }
 
 /* Header and Search */
 .Leaderbord-Heading-Container {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     width: 90%;
     position: relative;
+    gap: 10px;
 }
 
 .Leaderboard-Heading {
+    position: relative;
+    left: -1%;
     color: #95F6FF;
     font-family: Tektur, sans-serif;
     font-size: 48px;
@@ -66,48 +67,32 @@
   opacity: 0.5;
 }
 
+.angled-searchbar{
+    position: relative;
+}
+
 .mag-glass {
   position: absolute;
-  left: 10px;
-  top: 10px;
   pointer-events: none;
+  flex: 1;
 }
 
-.angled-searchbar {
-  position: relative;
-  width: 360px;
-  height: 38px;
-  display: flex;
-  align-items: center;
-  padding-left: 40px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid #95F6FF;
-  clip-path: polygon(
-    0% 0%,         /* top-left */
-    100% 0%,       /* top-right */
-    95% 100%,      /* bottom-right angled */
-    0% 100%        /* bottom-left */
-  );
-  backdrop-filter: blur(8px);
-  border-radius: 4px;
-  transition: border 0.3s ease;
-  z-index: 1;
-}
-
-.angled-searchbar:focus-within {
-  border-color: #79FFB6;
-}
 
 .angled-input {
-  flex: 1;
-  height: 100%;
-  border: none;
-  outline: none;
-  background: transparent;
-  color: #ECF5FF;
-  font-family: "Neue Montreal", sans-serif;
-  font-size: 16px;
-  letter-spacing: 0.3px;
+    position: absolute;
+    left: 15%;
+    top: -8%;
+    flex: 1;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #ECF5FF;
+    font-family: "Neue Montreal", sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.3px;
+    font-weight: 400;
+    letter-spacing: -0.176px;
 }
 
 .angled-input::placeholder {
@@ -129,8 +114,10 @@
 
 /* Subheading Row */
 .Leaderboard-Subheading-Container {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 100fr 100fr 6fr;
+    gap: 10px;
     align-items: center;
     width: 92%;
     justify-content: space-between;
@@ -143,7 +130,11 @@
     align-items: center;
     justify-content: center;
     align-content: center;
-    margin-right: 20px;
+}
+
+.arrow {
+  width: 2.8vw;
+  transition: transform 0.2s ease;
 }
 
 /* .arrow {
@@ -166,7 +157,7 @@
     padding: 10px;
     border: 1px solid #95F6FF;
     color: #95F6FF;
-    font-size: 20px;
+    font-size: 15px;
     background: rgba(255, 255, 255, 0.02);
     backdrop-filter: blur(4px);
 
@@ -178,11 +169,150 @@
     flex-direction: column;
     width: 90%;
     max-width: 1368px;
-    min-height: 400px;
+    /* max-height: 50vh; */
+    /* overflow-x: hidden;
+    overflow-y: auto; */
     border: 1px solid #95F6FF;
     padding: 20px;
     gap: 16px;
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 20px rgba(149, 246, 255, 0.15);
+    position: relative;
+}
+
+.Leaderboard-Container-wrapper{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    max-height: 50vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 20px;
+
+}
+
+/* Scrollbar container (track) */
+::-webkit-scrollbar {
+    display: flex;
+    width: 16px;
+    height: 590px;
+    padding-bottom: 470px;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    /* dark background */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /* background-color: #0a0015; */
+  border: 1px solid #78efff;
+}
+
+/* Thumb */
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg,
+        transparent 0%,
+        transparent 7%,
+        #78efff 7%,
+        #78efff 93%,
+        transparent 93%,
+        transparent 100%
+    );
+}
+
+/* Thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg,
+        transparent 0%,
+        transparent 7%,
+        #5bd9f5 7%,
+        #5bd9f5 93%,
+        transparent 93%,
+        transparent 100%
+    );
+}
+
+/* Arrows (note: not supported in all modern browsers) */
+::-webkit-scrollbar-button:single-button {
+  height: 20px;
+  background: transparent;
+  display: block;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="17" height="10" viewBox="0 0 17 10" fill="none"><path d="M16.5492 9.0056L9.0052 1.0001L0.999699 8.54411" stroke="%2395F6FF"/></svg>');
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: rotate(0deg); /* top */
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-button:single-button:vertical:decrement {
+  transform: rotate(0deg);
+}
+
+::-webkit-scrollbar-button:single-button:vertical:increment {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="17" height="10" viewBox="0 0 17 10" fill="none"><path d="M16.5494 0.544002L9.00544 8.5495L0.999943 1.0055" stroke="%2395F6FF"/></svg>');
+}
+
+/* body {
+  scrollbar-width: thin; 
+  scrollbar-color: #78efff ;
+} */
+
+
+.angularsearch{
+    width: 355px;
+    height: 36px;
+}
+
+
+
+
+@media (max-width:725px){
+    .Leaderbord-Heading-Container{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .arrow {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+@media (max-width: 444px){
+    /* .playtime-heading{
+        font-size: 12px;
+    } */
+
+    .angularsearch{
+        width: 300px;
+        height: 36px;
+    }
+
+    .Leaderboard-Container {
+        padding: 10px;
+        
+    }
+    .Leaderboard-Container-wrapper{
+        /* justify-content: center; */
+        align-items: center;
+        align-content: center;
+    }
+
+
+    ::-webkit-scrollbar{
+        display: none;
+    }
+
+    .username-heading,
+    .playtime-heading{
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    
 }

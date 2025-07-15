@@ -71,9 +71,7 @@ function LeaderboardPage(){
     return(
         <div className="LeaderboardPage">
             <Navbar/>
-            <main>
-                <LeaderboardComponent data={Leaderboard_data}/>
-            </main>
+            <LeaderboardComponent data={Leaderboard_data}/>
             <Footer />
         </div>
     );

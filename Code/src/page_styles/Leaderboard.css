@@ -2,11 +2,11 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-image: url('../assets/leaderboard_background.png'); /* Replace with your image path */
+  background-image: url('../assets/leaderboard_background_low_opacity.png'); /* Replace with your image path */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: #151515;
+  background-color: #0E0216;
 }
 
 
@@ -21,5 +21,11 @@ main {
   flex: 1;
   display: flex;
   justify-content: center;
-  padding: 2rem;
+
+}
+
+@media(max-width: 444px){
+    .LeaderboardPage{
+        overflow-x: hidden;
+    }
 }
