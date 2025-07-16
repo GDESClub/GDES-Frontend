@@ -2,9 +2,6 @@ import React from 'react';
 import './SectionHeader.css';
 
 const DotIcon = ({ type }) => {
-  const radius = 8;
-  const strokeWidth = 1;
-  const spacing = 16; // so the circles just touch
 
   switch (type) {
     case 'L':

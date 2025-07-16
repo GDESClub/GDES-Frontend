@@ -2,7 +2,7 @@ import React from 'react';
 import SectionHeader from './SectionHeader';
 import './AboutComponents.css';
 
-const members = new Array(12).fill({ name: 'Name', role: 'Member' });
+const members = new Array(29).fill({ name: 'Name', role: 'Member' });
 members[0] = { name: 'Name', role: 'Secretary' };
 
 const MembersSection = () => (

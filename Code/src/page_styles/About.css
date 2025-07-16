@@ -2,7 +2,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-image: url('../assets/image.png'); /* Replace with your image path */
+  background-image: url('../assets/AboutBackground.png'); /* Replace with your image path */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
