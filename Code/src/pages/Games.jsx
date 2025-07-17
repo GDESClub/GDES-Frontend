@@ -142,7 +142,7 @@ function GamesPage() {
           <svg
             width={approxTextWidth + padding}
             height="36"
-            viewBox={`0 0 ${approxTextWidth + padding} 36`}
+            viewBox={`0 0 ${approxTextWidth + padding + 1} 36`}
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
