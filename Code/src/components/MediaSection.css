@@ -1,0 +1,95 @@
+.media-section {
+  color: white;
+  margin-left: 3rem;
+}
+
+.section-title  {
+  font-size: 1.2rem;
+  color: #ff73a4;
+  font-family: Tektur, sans-serif;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+}
+
+.carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 10px;
+  padding: 10px 40px;
+  overflow-x: hidden;
+}
+
+.card {
+  background-color: #33333300;
+  min-width: 200px;
+  margin-right: 0.5rem;
+  border-radius: 8px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.card.active {
+  transform: scale(1.1);
+}
+
+.thumbnail {
+  width: 100%;
+  height: 100px;
+  background-color: #333333;
+  border-radius: 5px;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.75rem;
+  padding: 5px;
+  color: #ECF5FF;
+  gap: 10px;
+}
+
+.stats span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.stats-icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+}
+
+.nav-btn {
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.nav-btn svg {
+  pointer-events: none;
+}
+
+.nav-btn.left {
+  left: 0;
+  margin-left: -1rem;
+}
+
+.nav-btn.right {
+  right: 0;
+}

@@ -8,13 +8,13 @@
   background-repeat: no-repeat;
   background-position: center;
   background-color: #111111;
+  overflow-x: hidden;
 }
 
 .GamesPage-Header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
 }
 
 .GamesPage::before {
@@ -43,7 +43,7 @@
 .play-games h2 {
   color: #ff73a4;
   font-family: Tektur, sans-serif;
-  margin-left: 4rem;
+  margin-left: 2rem;
   font-size: 48px;
   font-weight: 400;
   letter-spacing: -0.5px;
