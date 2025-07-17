@@ -37,7 +37,6 @@
   padding-left: 0.3rem;
   padding-bottom: 1rem;
   padding-top: 0.5rem;
-  padding-right: 0.5rem;
   margin-left: 3rem;
 }
 
@@ -63,13 +62,12 @@
   background-position: center;
 }
 
-.member-box:hover {
+.member-box:hover path{
   stroke: #79ffb6;
 }
 
 .member-card:hover {
   transform: scale(1.1);
-  border-color: #79ffb6;
 }
 
 .member-info {
