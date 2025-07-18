@@ -1,0 +1,221 @@
+.GameInfoComponent{
+    display: grid;
+    grid-template-rows: 1fr ;
+    grid-template-columns: 1fr 10fr;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    padding: 40px 0;
+    font-family: "Neue Montreal", sans-serif;
+}
+
+.Closing_Section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Closing_Section_Main_Block_Wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Closing_Section_Main_Block{
+    width: 81px;
+    height: 626px;
+}
+
+.Back-Btn{
+    width: 39px;
+    height: 38px;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+}
+
+
+.GameInfo_Closing_Section_Side_Block{
+    width: 81px;
+    height: 71px;
+}
+
+.Info_Section{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.Info_Section_Main{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.Game_Banner_Wrapper{
+    border-radius: 16px;
+    border: 2px solid #FF73A4;
+    width: 868px;
+    height: 574px;
+}
+
+.Game_Banner{
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+}
+
+.Game_Banner_Tags_Container{
+    position: absolute;
+    left: 2%;
+    top: 2%;
+}
+
+.Game_Name{
+    color: #ECF5FF;
+    text-align: center;
+    font-family: Tektur;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 118%; /* 75.52px */
+    letter-spacing: -0.704px;
+    position: absolute;
+    bottom: 2%;
+    right: 2%;
+}
+
+.Rating_SubSection{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.star-container{
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+}
+
+.rating-txt{
+    color: #ECF5FF;
+    font-family: "Neue Montreal";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 24px */
+    letter-spacing: -0.176px;
+}
+
+.Description_SubSection{
+    color: #ECF5FF;
+    font-family: "Neue Montreal";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 30px */
+    letter-spacing: -0.22px;
+}
+
+.Like_SubSection{
+    color: #ECF5FF;
+    font-family: "Neue Montreal";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 24px */
+    letter-spacing: -0.176px;
+}
+
+.Like_Count{
+    font-weight: 500;
+}
+
+.Play_Section{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 574px;
+}
+
+.Play_Section_Header,
+.Play_Section_Footer{
+    display: flex;
+    flex-direction: row;
+}
+
+.Play_Section_Header-Footer_Elements{
+    width: 55px;
+    height: 42px;
+}
+
+.Play_Section_Main{
+    display: flex;
+    flex-direction: column;
+}
+
+.Play_Section_Btn_Wrapper{
+    position: relative;
+}
+
+.Play-Area-Btn{
+    width: 311px;
+    height: 34px;
+}
+
+.Play_Section_Btn_Txt{
+    color: #0E0216;
+    font-family: "Neue Montreal";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%; /* 30px */
+    letter-spacing: -0.22px;
+    position: absolute;
+    left: 50%;
+    top: 2%;
+}
+
+.Play_Section_About{
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: 1fr 10fr;
+}
+
+.info-icon{
+    color: #ECF5FF;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%; /* 36px */
+    letter-spacing: -0.264px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Play_Section_About_Heading{
+    color: #ECF5FF;
+    font-family: "Neue Montreal";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%; /* 30px */
+    letter-spacing: -0.22px;
+}
+
+.Play_Section_About_Body{
+    color: #ECF5FF;
+    font-family: "Neue Montreal";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+    letter-spacing: -0.176px;
+}
+
+
+

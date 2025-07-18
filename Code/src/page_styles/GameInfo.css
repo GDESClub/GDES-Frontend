@@ -1,0 +1,13 @@
+.GameInfo {
+  margin-top: 64px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  background-image: url('../assets/Game-infoBackground.jpg'); 
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #0E0216;
+  overflow-x: hidden;
+}
