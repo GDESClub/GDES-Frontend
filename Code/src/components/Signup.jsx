@@ -1,7 +1,7 @@
 import ModalWrapper from "./ModalWrapper";
 import AuthForm from "./AuthForm";
 
-function Signup({ onClose, onSwitch }) {
+function Signup({ onClose, onSwitch, onSubmit }) {
     return (
         <ModalWrapper onClose={onClose}>
             <AuthForm
@@ -17,10 +17,7 @@ function Signup({ onClose, onSwitch }) {
                 buttonText="Continue"
                 switchText={["Already have an account?", "Login here!"]}
                 onSwitch={onSwitch}
-                onSubmit={(e) => {
-                    e.preventDefault();
-                    console.log("Signup submit");
-                }}
+                onSubmit={onSubmit}
             />
         </ModalWrapper>
     );
