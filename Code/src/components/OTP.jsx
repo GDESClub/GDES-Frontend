@@ -2,9 +2,16 @@ import React, { useRef, useState } from "react";
 import AuthForm from "./AuthForm";
 import ModalWrapper from "./ModalWrapper";
 
+
 function OTP({ onClose, onSubmit }) {
+  const inputs = useRef([]);
+
+  if (inputs.current.length !== 6) {
+    inputs.current = Array(6)
+      .fill()
+      .map((_, i) => inputs.current[i] || React.createRef());
+  }
   const [otp, setOtp] = useState(Array(6).fill(""));
-  const inputs = Array.from({ length: 6 }, () => useRef(null));
 
   // Handle input change and move focus
   const handleChange = (e, idx) => {
@@ -32,7 +39,10 @@ function OTP({ onClose, onSubmit }) {
   // Submit OTP
   const handleSubmit = e => {
     e.preventDefault();
-    onSubmit(otp.join(""));
+    if (otp.every(digit => digit !== "")) {
+      onSubmit(otp.join(""));
+    }
+
   };
 
   return (

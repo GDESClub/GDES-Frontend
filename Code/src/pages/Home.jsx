@@ -3,54 +3,51 @@ import Navbar from "../components/Navbar";
 import HomeHero from "../components/HomeHero";
 import Login from "../components/Login";
 import Signup from "../components/Signup";
+import OTP from "../components/OTP";
 import { useState, useEffect } from "react";
 import '../page_styles/Home.css';
 
-function HomePage(){
-    const [showLogin, setShowLogin] = useState(false);
-    const [showSignup, setShowSignup] = useState(false);
+function HomePage() {
+  const [modal, setModal] = useState(null); // 'login' | 'signup' | 'otp' | null
 
-    // optional: stop scroll behind modal
-    useEffect(() => {
-        if (showLogin || showSignup) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "auto";
-        }
-    }, [showLogin, showSignup]);
+  useEffect(() => {
+    document.body.style.overflow = modal ? "hidden" : "auto";
+  }, [modal]);
 
-    return(
-        <div className="HomePage">
-            <Navbar 
-                onLoginClick={() => setShowLogin(true)} 
-                onSignupClick={() => setShowSignup(true)}
-            />
-            <main>
-                <HomeHero />
-            </main>
-            <Footer />
+  return (
+    <div className="HomePage">
+      <Navbar 
+        onLoginClick={() => setModal("login")} 
+        onSignupClick={() => setModal("signup")}
+      />
+      <main>
+        <HomeHero />
+      </main>
+      <Footer />
 
-            {showLogin && 
-                <Login 
-                    onClose={() => setShowLogin(false)} 
-                    onSwitch={() => {
-                        setShowLogin(false);
-                        setShowSignup(true);
-                    }}
-                />
-            }
+      {modal === "login" && (
+        <Login 
+          onClose={() => setModal(null)} 
+          onSwitch={() => setModal("signup")}
+        />
+      )}
 
-            {showSignup && 
-                <Signup 
-                    onClose={() => setShowSignup(false)} 
-                    onSwitch={() => {
-                        setShowSignup(false);
-                        setShowLogin(true);
-                    }}
-                />
-            }
-        </div>
-    );
+      {modal === "signup" && (
+        <Signup 
+          onClose={() => setModal(null)} 
+          onSwitch={() => setModal("login")}
+          onSubmit={() => setModal("otp")}
+        />
+      )}
+
+      {modal === "otp" && (
+        <OTP 
+          onClose={() => setModal(null)} 
+          onSubmit={() => setModal("login")}
+        />
+      )}
+    </div>
+  );
 }
 
 export default HomePage;
