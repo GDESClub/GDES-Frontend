@@ -1,10 +1,10 @@
 import ModalWrapper from "./ModalWrapper";
 import AuthForm from "./AuthForm";
 
-function Login({ onClose, onSwitch }) {
+function Login({ onClose, onSwitch, onSubmit }) {
     return (
         <ModalWrapper onClose={onClose}>
-            <AuthForm 
+            <AuthForm
                 variant="login"
                 title="Login"
                 fields={[
@@ -14,10 +14,7 @@ function Login({ onClose, onSwitch }) {
                 buttonText="Continue"
                 switchText={["No Account?", "Create one!"]}
                 onSwitch={onSwitch}
-                onSubmit={(e) => {
-                    e.preventDefault();
-                    console.log("Login submit");
-                }}
+                onSubmit={onSubmit} // <-- Use the prop from parent
             />
         </ModalWrapper>
     );
