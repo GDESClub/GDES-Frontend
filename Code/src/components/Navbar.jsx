@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
+import logo from '../assets/test.png';
 import { useState } from "react";
 
 
@@ -210,9 +211,9 @@ function Navbar({ onLoginClick, onSignupClick }) {
 
             {/* Left Side */}
             <div className="navbar-left">
-                <svg className="navbar-logo" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="36" height="36" rx="18" fill="#D9D9D9" />
-                </svg>
+                <div className="navbar-logo">
+                    <img src={logo} alt="Logo" className="logo-img" />
+                </div>
 
                 <div className="navbar-left-deco">
                     <svg width="69" height="37" viewBox="0 0 69 37" fill="none" xmlns="http://www.w3.org/2000/svg">

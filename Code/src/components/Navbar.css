@@ -238,7 +238,7 @@ body, html {
   min-width: clamp(100px, 12vw, 140px); 
 }
 
-.navbar-logo {
+.navbar-logo .logo-img {
   width: clamp(28px, 3vw, 36px);
   height: clamp(28px, 3vw, 36px);
   border-radius: 50%;
@@ -246,6 +246,7 @@ body, html {
   align-items: center;
   justify-content: center;
   transition: box-shadow 0.18s ease-in-out;
+  filter: drop-shadow(0 0 6px #79FFB6);
 }
 
 .navbar-left-deco {
@@ -267,7 +268,7 @@ body, html {
   position: relative;
   height: 100%;
   overflow: visible;
-  gap: clamp(6px, 2.4vw, 24px);
+  
   transition: gap 0.18s;
 }
 
