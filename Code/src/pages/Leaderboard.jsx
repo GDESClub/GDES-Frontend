@@ -3,68 +3,34 @@ import LeaderboardComponent from "../components/LeaderboardComponent";
 import Footer from "../components/Footer";
 import '../page_styles/Leaderboard.css';
 
-const Leaderboard_data = [
-    { 
-        pos: 1, 
-        img: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fphonk.fandom.com%2Fwiki%2FIkfiresonn&psig=AOvVaw01wdr5DnFbszrgUoHQZMD5&ust=1752433654767000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCMjI8Z2CuI4DFQAAAAAdAAAAABAE" , 
-        name: "Name 1", 
-        playtime: "10:00:00" 
-    },
-    { 
-        pos: 2,
-        img: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fphonk.fandom.com%2Fwiki%2FIkfiresonn&psig=AOvVaw01wdr5DnFbszrgUoHQZMD5&ust=1752433654767000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCMjI8Z2CuI4DFQAAAAAdAAAAABAE" ,
-        name: "Name 2", 
-        playtime: "9:00:00" 
-    },
-    { 
-        pos: 3, 
-        img: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fphonk.fandom.com%2Fwiki%2FIkfiresonn&psig=AOvVaw01wdr5DnFbszrgUoHQZMD5&ust=1752433654767000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCMjI8Z2CuI4DFQAAAAAdAAAAABAE" ,
-        name: "Name 3", 
-        playtime: "8:00:00" 
-    },
-    { 
-        pos: 4, 
-        img: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fphonk.fandom.com%2Fwiki%2FIkfiresonn&psig=AOvVaw01wdr5DnFbszrgUoHQZMD5&ust=1752433654767000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCMjI8Z2CuI4DFQAAAAAdAAAAABAE" ,
-        name: "Name 4", 
-        playtime: "7:00:00" 
-    },
-    { 
-        pos: 5, 
-        img: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fphonk.fandom.com%2Fwiki%2FIkfiresonn&psig=AOvVaw01wdr5DnFbszrgUoHQZMD5&ust=1752433654767000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCMjI8Z2CuI4DFQAAAAAdAAAAABAE" ,
-        name: "Name 5", 
-        playtime: "6:00:00" 
-    },
-    { 
-        pos: 6, 
-        img: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fphonk.fandom.com%2Fwiki%2FIkfiresonn&psig=AOvVaw01wdr5DnFbszrgUoHQZMD5&ust=1752433654767000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCMjI8Z2CuI4DFQAAAAAdAAAAABAE" ,
-        name: "Name 6", 
-        playtime: "5:00:00" 
-    },
-    { 
-        pos: 7, 
-        img: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fphonk.fandom.com%2Fwiki%2FIkfiresonn&psig=AOvVaw01wdr5DnFbszrgUoHQZMD5&ust=1752433654767000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCMjI8Z2CuI4DFQAAAAAdAAAAABAE" ,
-        name: "Name 7", 
-        playtime: "4:00:00"
-    },
-    { 
-        pos: 8, 
-        img: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fphonk.fandom.com%2Fwiki%2FIkfiresonn&psig=AOvVaw01wdr5DnFbszrgUoHQZMD5&ust=1752433654767000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCMjI8Z2CuI4DFQAAAAAdAAAAABAE" ,
-        name: "Name 8", 
-        playtime: "3:00:00" 
-    },
-    { 
-        pos: 9, 
-        img: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fphonk.fandom.com%2Fwiki%2FIkfiresonn&psig=AOvVaw01wdr5DnFbszrgUoHQZMD5&ust=1752433654767000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCMjI8Z2CuI4DFQAAAAAdAAAAABAE" ,
-        name: "Name 9", 
-        playtime: "2:00:00" 
-    },
-    { 
-        pos: 10, 
-        img: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fphonk.fandom.com%2Fwiki%2FIkfiresonn&psig=AOvVaw01wdr5DnFbszrgUoHQZMD5&ust=1752433654767000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCMjI8Z2CuI4DFQAAAAAdAAAAABAE" ,
-        name: "Name 10", 
-        playtime: "1:00:00"
+function* generateLeaderboardData(n = 10) {
+    const names = [
+        "ShadowSlayer", "CrimsonWolf", "PixelPunk", "CyberNinja", "ArcadeKing",
+        "BlitzByte", "VenomViper", "NeonGhost", "RogueStorm", "CodeWizard",
+        "QuantumDuck", "DarkKnight", "LaserFalcon", "FrostHex", "IronPhantom"
+    ];
+
+    const avatarBase = "https://i.pravatar.cc/150?img=";
+
+    for (let i = 1; i <= n; i++) {
+        const randomName = names[Math.floor(Math.random() * names.length)];
+        const randomAvatar = `${avatarBase}${Math.floor(Math.random() * 70) + 1}`;
+        const totalSeconds = Math.floor(Math.random() * 10 * 3600); // Up to 10 hours
+
+        const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+        const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+        const seconds = String(totalSeconds % 60).padStart(2, '0');
+
+        yield {
+            pos: i,
+            img: randomAvatar,
+            name: randomName,
+            playtime: `${hours}:${minutes}:${seconds}`
+        };
     }
-];
+}
+
+const Leaderboard_data = [...generateLeaderboardData(100)];
 
 
 function LeaderboardPage(){
