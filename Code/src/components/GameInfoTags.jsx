@@ -1,7 +1,6 @@
-import React from "react";
 import './GameInfoTags.css';
 
-export default function GameInfoTags(tag){
+export default function GameInfoTags({tag}){
     return (
         <div className="GameInfoTags">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122 17" fill="none" className="White-Tag">

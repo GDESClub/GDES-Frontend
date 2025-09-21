@@ -1,12 +1,11 @@
-import React from "react";
 import GameInfoTags from './GameInfoTags';
 import './GameInfoComponent.css';
 
-
 export default function GameInfoComponent({data}) {
     const stars = [];
+    const rating = Number(data.rating) || 0;
     for (let i = 0; i < 5; i++) {
-        const fillPercent = Math.min(Math.max(data.rating - i, 0), 1) * 100;
+        const fillPercent = Math.min(Math.max(rating - i, 0), 1) * 100;
 
         stars.push(
         <svg
@@ -65,17 +64,10 @@ export default function GameInfoComponent({data}) {
                     <div className="Game_Banner_Wrapper">
                         <img src={data.banner} alt="" className="Game_Banner" />
                         <div className="Game_Banner_Tags_Container">
-                            {
-                                data.tags.map(
-                                    (tag, index) => (
-                                        <GameInfoTags
-                                            key = {index}
-                                            tag = {tag}
-                                        />
-                                    )
-                                )
-                            }
-                        </div>
+  {data.tags?.map((tag, index) => (
+    <GameInfoTags key={index} tag={tag} />
+  ))}
+</div>
                         <div className="Game_Name">
                             {data.name}
                         </div>

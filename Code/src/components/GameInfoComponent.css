@@ -55,36 +55,40 @@
 }
 
 
-.Game_Banner_Wrapper{
-    border-radius: 16px;
-    border: 2px solid #FF73A4;
-    width: 868px;
-    height: 574px;
+.Game_Banner_Wrapper {
+  position: relative;
+  border-radius: 16px;
+  border: 2px solid #FF73A4;
+  width: 868px;
+  height: 574px;
+  overflow: hidden;
 }
 
-.Game_Banner{
-    flex-shrink: 0;
-    aspect-ratio: 1/1;
+.Game_Banner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
 }
 
-.Game_Banner_Tags_Container{
-    position: absolute;
-    left: 2%;
-    top: 2%;
+.Game_Banner_Tags_Container {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
-.Game_Name{
-    color: #ECF5FF;
-    text-align: center;
-    font-family: Tektur;
-    font-size: 64px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 118%; /* 75.52px */
-    letter-spacing: -0.704px;
-    position: absolute;
-    bottom: 2%;
-    right: 2%;
+.Game_Name {
+  color: #ECF5FF;
+  font-family: Tektur;
+  font-size: 48px;
+  font-weight: 400;
+  letter-spacing: -0.7px;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
 }
 
 .Rating_SubSection{
@@ -156,26 +160,25 @@
     flex-direction: column;
 }
 
-.Play_Section_Btn_Wrapper{
-    position: relative;
+.Play_Section_Btn_Wrapper {
+  position: relative;
+  margin: 12px 0;
 }
 
-.Play-Area-Btn{
-    width: 311px;
-    height: 34px;
+.Play-Area-Btn {
+  width: 311px;
+  height: 50px;
 }
 
-.Play_Section_Btn_Txt{
-    color: #0E0216;
-    font-family: "Neue Montreal";
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 150%; /* 30px */
-    letter-spacing: -0.22px;
-    position: absolute;
-    left: 50%;
-    top: 2%;
+.Play_Section_Btn_Txt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #0E0216;
+  font-family: "Neue Montreal";
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .Play_Section_About{
