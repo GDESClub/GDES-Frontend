@@ -4,6 +4,7 @@ import { MediaSection, mediaSections } from "../components/MediaSection"; // We'
 import '../page_styles/AllGames.css';
 
 // The "Play Games!" title component, unchanged
+
 const PlayGames = ({ title }) => (
     <div className="play-games">
         <h2>{title}</h2>
@@ -15,7 +16,7 @@ function GamesPage() {
 
     return (
         <div className="GamesPage">
-            <Navbar />
+            
             <main className="GamesPage-content">
                 <div className="GamesPage-Header">
                     <PlayGames title="Play Games!" />
