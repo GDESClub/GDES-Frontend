@@ -1,224 +1,225 @@
-.GameInfoComponent{
+.GameInfoComponent {
     display: grid;
-    grid-template-rows: 1fr ;
-    grid-template-columns: 1fr 10fr;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
+    /* Changed to auto 1fr to let the sidebar take only the space it needs */
+    grid-template-columns: auto 1fr;
+    align-items: start; /* Align items to the top */
+    gap: 40px; /* Increased gap for better separation */
     width: 100%;
-    padding: 40px 0;
+    max-width: 1440px; /* Added max-width for better viewing on large screens */
+    margin: 0 auto; /* Center the component */
+    padding: 40px 20px; /* Added horizontal padding */
     font-family: "Neue Montreal", sans-serif;
 }
 
-.Closing_Section{
+/* --- Left Sidebar Section --- */
+.Closing_Section {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.Closing_Section_Main_Block_Wrapper{
+.Closing_Section_Main_Block_Wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative; /* IMPORTANT: This makes the absolute positioning of the child work correctly */
 }
 
-.Closing_Section_Main_Block{
+.Closing_Section_Main_Block {
     width: 81px;
     height: 626px;
 }
 
-.Back-Btn{
+.Back-Btn {
     width: 39px;
     height: 38px;
     position: absolute;
-    top: 10%;
+    top: 40px; /* Fixed value instead of percentage for consistency */
     left: 50%;
+    transform: translateX(-50%); /* This perfectly centers the button horizontally */
+    transition: transform 0.2s ease-in-out; /* Added a nice hover effect */
 }
 
+.Back-Btn:hover {
+    transform: translateX(-50%) scale(1.1);
+}
 
-.GameInfo_Closing_Section_Side_Block{
+.GameInfo_Closing_Section_Side_Block {
     width: 81px;
     height: 71px;
 }
 
-.Info_Section{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+/* --- Main Content Section --- */
+.Info_Section {
+    display: grid; /* Changed to grid for more robust layout control */
+    grid-template-columns: 2fr 1fr; /* 2 parts for main content, 1 part for play section */
+    gap: 30px; /* Add a gap between the main content and the play section */
+    align-items: start;
 }
 
-.Info_Section_Main{
+.Info_Section_Main {
     display: flex;
     flex-direction: column;
+    gap: 24px; /* KEY FIX: Adds vertical spacing between banner, rating, description, etc. */
 }
 
 
+/* --- Game Banner & Info --- */
 .Game_Banner_Wrapper {
-  position: relative;
-  border-radius: 16px;
-  border: 2px solid #FF73A4;
-  width: 868px;
-  height: 574px;
-  overflow: hidden;
+    position: relative;
+    border-radius: 16px;
+    border: 2px solid #FF73A4;
+    /* Removed fixed height/width to be more responsive */
+    aspect-ratio: 16 / 10; /* Maintain aspect ratio */
+    overflow: hidden;
 }
 
 .Game_Banner {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 16px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .Game_Banner_Tags_Container {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
 }
 
 .Game_Name {
-  color: #ECF5FF;
-  font-family: Tektur;
-  font-size: 48px;
-  font-weight: 400;
-  letter-spacing: -0.7px;
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
+    color: #ECF5FF;
+    font-family: Tektur;
+    font-size: 48px;
+    font-weight: 400;
+    letter-spacing: -0.7px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    /* Added text shadow for better readability over complex backgrounds */
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.Rating_SubSection{
+.Rating_SubSection {
     display: flex;
     flex-direction: row;
+    align-items: center; /* Vertically align stars and text */
     gap: 10px;
 }
 
-.star-container{
+.star-container {
     display: flex;
     flex-direction: row;
     gap: 2px;
 }
 
-.rating-txt{
+.rating-txt {
     color: #ECF5FF;
     font-family: "Neue Montreal";
     font-size: 16px;
-    font-style: normal;
     font-weight: 400;
-    line-height: 150%; /* 24px */
-    letter-spacing: -0.176px;
 }
 
-.Description_SubSection{
+.Description_SubSection {
     color: #ECF5FF;
-    font-family: "Neue Montreal";
     font-size: 20px;
-    font-style: normal;
     font-weight: 400;
-    line-height: 150%; /* 30px */
+    line-height: 150%;
     letter-spacing: -0.22px;
+    max-width: 65ch; /* Limit line length for better readability */
 }
 
-.Like_SubSection{
+.Like_SubSection {
     color: #ECF5FF;
-    font-family: "Neue Montreal";
     font-size: 16px;
-    font-style: normal;
     font-weight: 400;
-    line-height: 150%; /* 24px */
-    letter-spacing: -0.176px;
 }
 
-.Like_Count{
+.Like_Count {
     font-weight: 500;
 }
 
-.Play_Section{
+
+/* --- Play Section (Right Side) --- */
+.Play_Section {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 574px;
+    height: 100%; /* Make it take the full height of the grid cell */
+    min-height: 574px; /* Ensure it has a minimum height */
 }
 
 .Play_Section_Header,
-.Play_Section_Footer{
+.Play_Section_Footer {
     display: flex;
     flex-direction: row;
 }
 
-.Play_Section_Header-Footer_Elements{
-    width: 55px;
+.Play_Section_Header-Footer_Elements {
+    width: 100%; /* Make elements fill the container */
     height: 42px;
 }
 
-.Play_Section_Main{
+.Play_Section_Main {
     display: flex;
     flex-direction: column;
+    gap: 30px; /* Add space between buttons and about section */
 }
 
 .Play_Section_Btn_Wrapper {
-  position: relative;
-  margin: 12px 0;
+    position: relative;
+    margin: 12px 0;
 }
 
 .Play-Area-Btn {
-  width: 311px;
-  height: 50px;
+    width: 100%; /* Make buttons responsive */
+    height: 50px;
 }
 
 .Play_Section_Btn_Txt {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #0E0216;
-  font-family: "Neue Montreal";
-  font-size: 18px;
-  font-weight: 600;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #0E0216;
+    font-family: "Neue Montreal";
+    font-size: 18px;
+    font-weight: 600;
+    white-space: nowrap; /* Prevent text from wrapping */
 }
 
-.Play_Section_About{
+/* --- Simplified 'About' Section Grid --- */
+.Play_Section_About {
     display: grid;
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-columns: 1fr 10fr;
+    grid-template-columns: auto 1fr; /* Column for icon, column for text */
+    gap: 8px 12px; /* Row and column gap */
+    align-items: start;
 }
 
-.info-icon{
+.info-icon {
     color: #ECF5FF;
-    font-family: Inter;
     font-size: 24px;
-    font-style: normal;
     font-weight: 500;
-    line-height: 150%; /* 36px */
-    letter-spacing: -0.264px; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    grid-row: 1 / 3; /* KEY FIX: Make the icon span both the heading and body rows */
+    margin-top: 4px; /* Small alignment adjustment */
 }
 
-.Play_Section_About_Heading{
+.Play_Section_About_Heading {
     color: #ECF5FF;
-    font-family: "Neue Montreal";
     font-size: 20px;
-    font-style: normal;
     font-weight: 500;
-    line-height: 150%; /* 30px */
-    letter-spacing: -0.22px;
+    line-height: 1.5;
 }
 
-.Play_Section_About_Body{
+.Play_Section_About_Body {
     color: #ECF5FF;
-    font-family: "Neue Montreal";
     font-size: 16px;
-    font-style: normal;
     font-weight: 500;
-    line-height: 150%;
-    letter-spacing: -0.176px;
+    line-height: 1.5;
+    /* KEY FIX: This ensures the body text stays in the second column */
+    grid-column: 2; 
 }
-
-
-
