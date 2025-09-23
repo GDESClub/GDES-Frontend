@@ -299,6 +299,7 @@ body, html {
   box-sizing: border-box;
   transition: all 0.2s cubic-bezier(.75, 0, .27, 1);
   filter: drop-shadow(0 0 6px #79FFB6);
+  pointer-events: none;
 }
 
 /* Desktop positioning */
@@ -468,6 +469,7 @@ body, html {
   box-shadow: 0 0 8px 1px #79FFB644;
   white-space: nowrap; /* Prevents button text wrap */
   flex-shrink: 0;
+  z-index: 9999;
 }
 
 .navbar-login-btn:hover {

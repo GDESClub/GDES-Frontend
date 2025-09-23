@@ -16,8 +16,10 @@ const sampleData = {
 };
     return(
         <div className="GameInfo">
-            <Navbar/>
+            
             <GameInfoComponent data={sampleData}/>
+            
+            <GameInfoComponent/>
             <Footer />
         </div>
     );

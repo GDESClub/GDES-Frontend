@@ -36,7 +36,7 @@ const Leaderboard_data = [...generateLeaderboardData(100)];
 function LeaderboardPage(){
     return(
         <div className="LeaderboardPage">
-            <Navbar/>
+            
             <LeaderboardComponent data={Leaderboard_data}/>
             <Footer />
         </div>

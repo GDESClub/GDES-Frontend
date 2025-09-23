@@ -9,7 +9,7 @@ import '../page_styles/About.css';
 function AboutPage(){
     return(
         <div className="AboutPage">
-            <Navbar/>
+            
             <AboutSection />
             <MembersSection />
             <CreditsSection />
