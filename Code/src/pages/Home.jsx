@@ -27,7 +27,7 @@ function HomePage() {
 
       {modal === "login" && (
         <Login 
-          onClose={() => setModal(null)} 
+          onClose={() => setModal(null)}
           onSwitch={() => setModal("signup")}
         />
       )}

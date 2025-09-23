@@ -22,6 +22,7 @@ function AuthForm({ title, fields, buttonText, switchText, onSwitch, onSubmit, v
               <input
                 type={field.type}
                 placeholder={field.placeholder}
+                onInputCapture={(e) => field.oninput(e.currentTarget.value)}
               />
             </div>
           </div>
