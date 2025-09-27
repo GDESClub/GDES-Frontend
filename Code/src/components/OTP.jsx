@@ -1,10 +1,13 @@
 import React, { useRef, useState } from "react";
 import AuthForm from "./AuthForm";
 import ModalWrapper from "./ModalWrapper";
+import { useUserState } from "./UserState";
 
 
 function OTP({ onClose, onSubmit }) {
   const inputs = useRef([]);
+
+  const userState = useUserState();
 
   if (inputs.current.length !== 6) {
     inputs.current = Array(6)
@@ -37,12 +40,36 @@ function OTP({ onClose, onSubmit }) {
   };
 
   // Submit OTP
-  const handleSubmit = e => {
+  const handleSubmit = (e, userState) => {
     e.preventDefault();
+    console.log(otp);
     if (otp.every(digit => digit !== "")) {
-      onSubmit(otp.join(""));
+      console.log("submitting");
+      const {userValue, setUserValue} = userState;
+      const jwtToken = userValue['jwtToken'];
+      if (jwtToken) {
+          console.log("Log Out First");
+          console.log("Current Token: ", jwtToken);
+          return;
+      }
+      console.log("verifying");
+      fetch("https://gdesbackend.vercel.app/api/verify-otp", { method: 'POST', headers: { "Content-Type": "application/json" }, body: JSON.stringify({ "email": userState['email'], "otp": otp.join('') }) })
+      .then((res) => {
+              if (res.status != 201) {
+                  return;
+              }
+              res.json().then((body) => {
+              if (!body) {
+                  return;
+              }
+              if (!body['token']) {
+                  return;
+              }
+              setUserValue({'status': 2, 'email': userValue['email'], 'username': userValue['username'], 'jwtToken': body['token']});
+              onSubmit()
+          })
+      })
     }
-
   };
 
   return (
@@ -54,6 +81,7 @@ function OTP({ onClose, onSubmit }) {
           {
             label: "",
             type: "custom",
+            oninput: () => {},
             render: () => (
               <div style={{ display: "flex", gap: "12px", justifyContent: "center", margin: "40px 0" }}>
                 {inputs.map((ref, idx) => (
@@ -80,8 +108,8 @@ function OTP({ onClose, onSubmit }) {
                         color: "white",
                         outline: "none"
                       }}
-                      onChange={e => handleChange(e, idx)}
-                      onKeyDown={e => handleKeyDown(e, idx)}
+                      onChange={(e) => handleChange(e, idx)}
+                      onKeyDown={(e) => handleKeyDown(e, idx)}
                       inputMode="numeric"
                       pattern="[0-9]*"
                       autoFocus={idx === 0}
@@ -95,7 +123,7 @@ function OTP({ onClose, onSubmit }) {
         buttonText="Continue"
         switchText={["", ""]}
         onSwitch={() => { }}
-        onSubmit={handleSubmit}
+        onSubmit={(e) => handleSubmit(e, userState)}
       />
     </ModalWrapper>
   );

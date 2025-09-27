@@ -30,7 +30,6 @@ function App() {
 
       {showAuth && (
         <AuthFlow
-          initialStep={showAuth}
           onClose={() => setShowAuth(false)}
         />
       )}

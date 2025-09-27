@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import "../components/MediaSection.css";
+import bannerImage from "../assets/placeholder.png";
 
 // --- Reusable Icon Components ---
 
@@ -37,13 +38,13 @@ const StatsIcon = ({ type }) => {
 // --- Main Component ---
 
 export const mediaSections = [
-    { title: "Recently Played", items: new Array(10).fill({ stars: "15.8k", likes: "9.2k", plays: "30.1k" }) },
-    { title: "Trending Now", items: new Array(12).fill({ stars: "22.5k", likes: "18.3k", plays: "55.9k" }) },
-    { title: "Featured", items: new Array(8).fill({ stars: "101.k", likes: "88.7k", plays: "205.4k" }) },
-    { title: "Latest Releases", items: new Array(9).fill({ stars: "5.1k", likes: "3.2k", plays: "8.8k" }) }
+    { title: "Recently Played", items: [{ name: "GettingStuartAndEd", stars: "15.8k", likes: "9.2k", plays: "30.1k" }, { name: "LittleGreenDinos", stars: "15.8k", likes: "9.2k", plays: "30.1k" }, { name: "MindSwapper", stars: "15.8k", likes: "9.2k", plays: "30.1k" }, { name: "PlayTest", stars: "15.8k", likes: "9.2k", plays: "30.1k" }] },
+    { title: "Trending Now", items: [{ name: "GettingStuartAndEd", stars: "15.8k", likes: "9.2k", plays: "30.1k" }, { name: "LittleGreenDinos", stars: "15.8k", likes: "9.2k", plays: "30.1k" }, { name: "MindSwapper", stars: "15.8k", likes: "9.2k", plays: "30.1k" }, { name: "PlayTest", stars: "15.8k", likes: "9.2k", plays: "30.1k" }] },
+    { title: "Featured", items: [{ name: "GettingStuartAndEd", stars: "15.8k", likes: "9.2k", plays: "30.1k" }, { name: "LittleGreenDinos", stars: "15.8k", likes: "9.2k", plays: "30.1k" }, { name: "MindSwapper", stars: "15.8k", likes: "9.2k", plays: "30.1k" }, { name: "PlayTest", stars: "15.8k", likes: "9.2k", plays: "30.1k" }] },
+    { title: "Latest Releases", items: [{ name: "GettingStuartAndEd", stars: "15.8k", likes: "9.2k", plays: "30.1k" }, { name: "LittleGreenDinos", stars: "15.8k", likes: "9.2k", plays: "30.1k" }, { name: "MindSwapper", stars: "15.8k", likes: "9.2k", plays: "30.1k" }, { name: "PlayTest", stars: "15.8k", likes: "9.2k", plays: "30.1k" }] }
 ];
 
-export const MediaSection = ({ title, items }) => {
+export const MediaSection = ({ title, items, onClick }) => {
     const scrollRef = useRef(null);
     const [atStart, setAtStart] = useState(true);
     const [atEnd, setAtEnd] = useState(false);
@@ -79,10 +80,20 @@ export const MediaSection = ({ title, items }) => {
 
                 <div className="carousel" ref={scrollRef}>
                     {items.map((item, index) => (
-                        <div className="card" key={index}>
-                            <div className="thumbnail" />
+                        <div className="card" key={index} onClick={() => {onClick(
+                            {
+                                banner: `thumbnails/${item.name}Thumb.jpg`, // to Change
+                                tags: ["Adventure", "Puzzle", "Multiplayer"], // to Change
+                                name: item.name.replace(/([A-Z])/g, ' $1').trim(),
+                                rating: 4.2,               // rating between 0 and 5 // to Change
+                                description: "Embark on an epic journey through mystical lands and solve challenging puzzles.", // to Change
+                                liked_count: 1284, // to Change
+                                about: "Mystic Quest is a fantasy adventure game where players explore dungeons, collect treasures, and battle mythical creatures." // to Change
+                            }
+                        )}}>
+                            <img className="thumbnail" src={`thumbnails/${item.name}Thumb.jpg`} alt="Game Thumbnail" width={200} height={100} />
                             <div className="card-info">
-                                <p className="card-title">Game Title Here</p>
+                                <p className="card-title">{item.name.replace(/([A-Z])/g, ' $1').trim()}</p>
                                 <div className="stats">
                                     <span><StatsIcon type="stars" /> {item.stars}</span>
                                     <span><StatsIcon type="plays" /> {item.plays}</span>

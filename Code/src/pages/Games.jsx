@@ -2,6 +2,8 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { MediaSection, mediaSections } from "../components/MediaSection"; // We'll move the component and data
 import '../page_styles/AllGames.css';
+import GameInfo from "./GameInfo";
+import { useState } from "react";
 
 // The "Play Games!" title component, unchanged
 
@@ -14,9 +16,11 @@ const PlayGames = ({ title }) => (
 function GamesPage() {
     const username = "Rishi Gupta";
 
+    var [gameInfo, setGameInfo] = useState(null);
+
     return (
         <div className="GamesPage">
-            
+            {gameInfo != null ? <GameInfo data={gameInfo} /> : <></>}
             <main className="GamesPage-content">
                 <div className="GamesPage-Header">
                     <PlayGames title="Play Games!" />
@@ -28,7 +32,7 @@ function GamesPage() {
 
                 <div className="media-sections-container">
                     {mediaSections.map((section, index) => (
-                        <MediaSection key={index} title={section.title} items={section.items} />
+                        <MediaSection key={index} title={section.title} items={section.items} onClick={(GameInfo) => {setGameInfo(GameInfo); console.log(gameInfo)}} />
                     ))}
                 </div>
             </main>

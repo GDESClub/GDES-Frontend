@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import Login from "./Login";
 import Signup from "./Signup";
 import OTP from "./OTP";
 import Confirmation from "./Confirmation";
+import { useUserState } from "./UserState";
 
-function AuthFlow({ initialStep = "login", onClose }) {
-  const [step, setStep] = useState(initialStep);
+function AuthFlow({ onClose }) {
+  const {userValue} = useUserState();
+
+  const [step, setStep] = useState(userValue['status'] == 0 ? 'login' : userValue['status'] == 1 ? 'otp' : 'confirmation');
 
   return (
     <>
@@ -13,7 +16,7 @@ function AuthFlow({ initialStep = "login", onClose }) {
         <Login
           onClose={onClose}
           onSwitch={() => setStep("signup")}
-          onSubmit={() => setStep("otp")}
+          onSubmit={() => {setStep("confirmation")}}
         />
       )}
       {step === "signup" && (
