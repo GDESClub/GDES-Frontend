@@ -4,8 +4,8 @@ import '../page_styles/GameInfo.css';
 import GameInfoComponent from "../components/GameInfoComponent.jsx";
 import bannerImage from "../assets/placeholder.png";
 
-function GameInfo(){
-const sampleData = {
+function GameInfo(gameData){
+const sampleGameData = {
   banner: bannerImage,
   tags: ["Adventure", "Puzzle", "Multiplayer"],
   name: "Mystic Quest",
@@ -17,9 +17,8 @@ const sampleData = {
     return(
         <div className="GameInfo">
             
-            <GameInfoComponent data={sampleData}/>
+            <GameInfoComponent data={gameData}/>
             
-            <GameInfoComponent/>
             <Footer />
         </div>
     );

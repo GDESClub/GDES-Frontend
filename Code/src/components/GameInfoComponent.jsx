@@ -1,9 +1,11 @@
 import GameInfoTags from './GameInfoTags';
 import './GameInfoComponent.css';
 
-export default function GameInfoComponent({data}) {
+export default function GameInfoComponent({data: {data}}) {
     const stars = [];
     const rating = Number(data.rating) || 0;
+
+    console.log(data);
 
     // Star rating generation logic
     for (let i = 0; i < 5; i++) {
