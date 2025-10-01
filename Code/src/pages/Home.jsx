@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import Footer from '/src/components/Footer.jsx';
 import '../page_styles/home.css';
 import LandingAnimation from '../components/LandingAnimation';
+import { Link } from 'react-router-dom';
 
 // Custom hook for the text scramble animation
 const useScrambleText = (text, duration = 2000) => {
@@ -104,13 +105,13 @@ function HomePage() {
                 <section className="home-hero">
                     <h1 className="hero-title" data-text="GDES IITG">GDES IITG</h1>
                     <p className="hero-description">{animatedDescription}</p>
-                    <a href="/games" className="hero-cta">
+                    <Link to="/games" className="hero-cta">
                         <span>Explore</span>
                         <svg width="13px" height="10px" viewBox="0 0 13 10">
                             <path d="M1,5 L11,5"></path>
                             <polyline points="8 1 12 5 8 9"></polyline>
                         </svg>
-                    </a>
+                    </Link>
                 </section>
             </main>
             <Footer />
