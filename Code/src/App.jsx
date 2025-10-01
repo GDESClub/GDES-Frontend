@@ -9,6 +9,7 @@ import GameInfo from './pages/GameInfo'
 import Navbar from "./components/Navbar";  
 import GamePlayerPage from './pages/GamePlayerPage';
 import AuthModal from './components/AuthController';
+import NotFoundPage from './pages/NotFound';
 
 function App() {
   const [showAuth, setShowAuth] = useState(false);
@@ -28,6 +29,7 @@ function App() {
         <Route path='/leaderboard' element={<LeaderboardPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/play/:gameId" element={<GamePlayerPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
       {showAuth && (

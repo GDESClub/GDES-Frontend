@@ -1,0 +1,134 @@
+/* --- THEME & KEYFRAMES --- */
+:root {
+  --theme-404-primary: #FF4D4D; /* A stark, alarming red */
+  --theme-404-secondary: #79FFB6;
+  --theme-404-glow: rgba(255, 77, 77, 0.7);
+  --theme-bg: #0E0216;
+}
+
+@keyframes text-glitch-404 {
+    0% { transform: translate(0); }
+    20% { transform: translate(-3px, 3px); }
+    40% { transform: translate(-3px, -3px); }
+    60% { transform: translate(3px, 3px); }
+    80% { transform: translate(3px, -3px); }
+    100% { transform: translate(0); }
+}
+
+@keyframes fadeIn-404 {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-glow-404 {
+    0%, 100% { box-shadow: 0 0 15px -2px var(--theme-404-secondary); }
+    50% { box-shadow: 0 0 25px 4px var(--theme-404-secondary); }
+}
+
+
+/* --- MAIN PAGE LAYOUT & BACKGROUND --- */
+.NotFoundPage {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--theme-bg);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.glitch-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.not-found-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    animation: fadeIn-404 1s ease-out;
+}
+
+/* --- TEXT & TITLES --- */
+.error-code {
+    font-family: 'Tektur', sans-serif;
+    font-size: clamp(8rem, 25vw, 15rem);
+    font-weight: 700;
+    color: var(--theme-404-primary);
+    text-shadow: 0 0 30px var(--theme-404-glow);
+    margin: 0;
+    position: relative;
+    animation: text-glitch-404 0.15s infinite;
+}
+
+/* Glitchy text effect layers */
+.error-code::before, .error-code::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.error-code::before {
+    left: 3px;
+    text-shadow: -3px 0 var(--theme-404-secondary);
+    mix-blend-mode: screen;
+}
+.error-code::after {
+    left: -3px;
+    text-shadow: 3px 0 #A8A2FF;
+    mix-blend-mode: screen;
+}
+
+
+.error-subtitle {
+    font-family: 'Tektur', sans-serif;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    letter-spacing: 4px;
+    color: #ccc;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.error-description {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1rem;
+    color: #888;
+    line-height: 1.8;
+    max-width: 50ch;
+    margin: 1.5rem auto 2.5rem;
+}
+
+/* --- HOME BUTTON --- */
+.home-button {
+    display: inline-block;
+    background: transparent;
+    border: 2px solid var(--theme-404-secondary);
+    color: var(--theme-404-secondary);
+    font-family: 'Tektur', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    padding: 0.8rem 2.5rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: pulse-glow-404 3s infinite;
+}
+
+.home-button:hover {
+    background: var(--theme-404-secondary);
+    color: var(--theme-bg);
+    box-shadow: 0 0 25px 5px rgba(121, 255, 182, 0.6);
+    animation-play-state: paused;
+}
+
