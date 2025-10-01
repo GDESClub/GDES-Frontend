@@ -1,0 +1,131 @@
+/* --- THEME & KEYFRAMES --- */
+:root {
+  --theme-explore-primary: #FF73A4;
+  --theme-explore-secondary: #79FFB6;
+  --theme-explore-glow: rgba(255, 115, 164, 0.7);
+  --theme-bg: #0E0216;
+}
+
+@keyframes fadeIn-explore {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes glitch-game-over {
+    2%,64% { transform: translate(2px,0) skew(0deg); }
+    4%,60% { transform: translate(-2px,0) skew(0deg); }
+    62% { transform: translate(0,0) skew(5deg); }
+}
+
+
+/* --- MAIN PAGE & CANVAS --- */
+.explore-page {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--theme-bg);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center the canvas vertically */
+}
+
+.game-canvas {
+    width: 100%;
+    height: 400px; /* Match the fixed height in JS */
+    z-index: 1;
+}
+
+/* --- UI OVERLAY --- */
+.game-ui {
+    position: absolute;
+    top: 80px; /* Position below navbar */
+    left: 0;
+    width: 100%;
+    padding: 1rem 2rem;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    z-index: 2;
+    font-family: 'Tektur', sans-serif;
+    font-size: 1.5rem;
+    color: var(--theme-explore-primary);
+}
+
+.score-display {
+    text-shadow: 0 0 10px var(--theme-explore-glow);
+}
+.score-value {
+    color: #fff;
+    font-family: 'Roboto Mono', monospace;
+}
+
+/* --- GAME OVER SCREEN --- */
+.game-over-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(14, 2, 22, 0.8);
+    backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    animation: fadeIn-explore 0.5s ease;
+}
+
+.game-over-title {
+    font-family: 'Tektur', sans-serif;
+    font-size: clamp(3rem, 10vw, 6rem);
+    color: var(--theme-explore-primary);
+    text-shadow: 0 0 20px var(--theme-explore-glow);
+    position: relative;
+    animation: glitch-game-over 2s infinite;
+}
+.game-over-title::before, .game-over-title::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    overflow: hidden;
+}
+.game-over-title::before { left: 2px; text-shadow: -2px 0 var(--theme-explore-secondary); }
+.game-over-title::after { left: -2px; text-shadow: 2px 0 #95F6FF; }
+
+
+.final-score {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.5rem;
+    color: #ccc;
+    margin: 1rem 0 2rem;
+}
+
+.retry-button {
+    background: transparent;
+    border: 2px solid var(--theme-explore-primary);
+    color: var(--theme-explore-primary);
+    font-family: 'Tektur', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    padding: 0.8rem 2.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.retry-button:hover {
+    background: var(--theme-explore-primary);
+    color: var(--theme-bg);
+    box-shadow: 0 0 25px 5px var(--theme-explore-glow);
+}
+
+/* Make sure footer is on top */
+.Footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+}
+

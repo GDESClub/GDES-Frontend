@@ -13,8 +13,3 @@
     text-shadow: 0 0 8px rgba(149, 246, 255, 0.1);
 }
 
-.circle-icon {
-  fill: none;
-  stroke: #79FFB6;
-  filter: drop-shadow(0 0 4px #79FFB6);
-}

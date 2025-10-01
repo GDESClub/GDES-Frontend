@@ -1,46 +1,75 @@
-import Navbar from "../components/Navbar";
+import { useState, useEffect } from "react";
 import LeaderboardComponent from "../components/LeaderboardComponent";
 import Footer from "../components/Footer";
 import '../page_styles/Leaderboard.css';
 
-function* generateLeaderboardData(n = 10) {
-    const names = [
-        "ShadowSlayer", "CrimsonWolf", "PixelPunk", "CyberNinja", "ArcadeKing",
-        "BlitzByte", "VenomViper", "NeonGhost", "RogueStorm", "CodeWizard",
-        "QuantumDuck", "DarkKnight", "LaserFalcon", "FrostHex", "IronPhantom"
-    ];
+const LeaderboardSkeleton = () => (
+    <div className="leaderboard-skeleton">
+        {[...Array(10)].map((_, i) => (
+            <div className="skeleton-row" key={i}>
+                <div className="skeleton-pos"></div>
+                <div className="skeleton-avatar"></div>
+                <div className="skeleton-name"></div>
+                <div className="skeleton-playtime"></div>
+            </div>
+        ))}
+    </div>
+);
 
-    const avatarBase = "https://i.pravatar.cc/150?img=";
+export default function LeaderboardPage() {
+    const [leaderboardData, setLeaderboardData] = useState([]);
+    const [filteredData, setFilteredData] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
 
-    for (let i = 1; i <= n; i++) {
-        const randomName = names[Math.floor(Math.random() * names.length)];
-        const randomAvatar = `${avatarBase}${Math.floor(Math.random() * 70) + 1}`;
-        const totalSeconds = Math.floor(Math.random() * 10 * 3600); // Up to 10 hours
-
-        const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
-        const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
-        const seconds = String(totalSeconds % 60).padStart(2, '0');
-
-        yield {
-            pos: i,
-            img: randomAvatar,
-            name: randomName,
-            playtime: `${hours}:${minutes}:${seconds}`
+    useEffect(() => {
+        const fetchLeaderboard = async () => {
+            try {
+                const response = await fetch("https://gdesbackend.vercel.app/api/leaderboard");
+                if (!response.ok) throw new Error("Failed to fetch leaderboard data.");
+                const data = await response.json();
+                setLeaderboardData(data);
+                setFilteredData(data);
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setIsLoading(false);
+            }
         };
-    }
-}
+        fetchLeaderboard();
+    }, []);
 
-const Leaderboard_data = [...generateLeaderboardData(100)];
+    useEffect(() => {
+        const results = leaderboardData.filter(user =>
+            user.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredData(results);
+    }, [searchTerm, leaderboardData]);
 
-
-function LeaderboardPage(){
-    return(
+    return (
         <div className="LeaderboardPage">
-            
-            <LeaderboardComponent data={Leaderboard_data}/>
+            {/* --- NEW: Floating 3D Shapes --- */}
+            <div className="background-shapes">
+                <div className="floating-shape"></div>
+                <div className="floating-shape"></div>
+                <div className="floating-shape"></div>
+                <div className="floating-shape"></div>
+                <div className="floating-shape"></div>
+                <div className="floating-shape"></div>
+                <div className="floating-shape"></div>
+                <div className="floating-shape"></div>
+            </div>
+
+            {isLoading ? (
+                <LeaderboardSkeleton />
+            ) : (
+                <LeaderboardComponent
+                    data={filteredData}
+                    onSearchChange={setSearchTerm}
+                />
+            )}
             <Footer />
         </div>
     );
 }
 
-export default LeaderboardPage;

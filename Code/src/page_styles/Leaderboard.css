@@ -1,34 +1,158 @@
-.LeaderboardPage {
-  margin-top: 64px;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  overflow-x: hidden;
-  background-image: url('../assets/leaderboard_background_low_opacity.png'); 
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: #0E0216;
-  overflow-x: hidden;
+/* --- THEME & KEYFRAMES --- */
+:root {
+  --theme-leaderboard: #95F6FF;
+  --theme-glow: rgba(149, 246, 255, 0.6);
+  --theme-bg: #0E0216;
 }
 
-
-.LeaderboardPage::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
 }
 
-main {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-
+@keyframes grid-pan {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
 }
 
-@media(max-width: 444px){
-    .LeaderboardPage{
-        overflow-x: hidden;
+/* Animation for floating 3D shapes */
+@keyframes float-rotate {
+    0% {
+        transform: translateY(100vh) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    }
+    100% {
+        transform: translateY(-100vh) rotateX(180deg) rotateY(180deg) rotateZ(180deg);
     }
 }
+
+
+/* --- MAIN PAGE LAYOUT --- */
+.LeaderboardPage {
+  background-color: var(--theme-bg);
+  min-height: 100vh;
+  padding: 100px 2rem 2rem;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated grid background (now more subtle) */
+.LeaderboardPage::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: 
+        linear-gradient(to right, rgba(149, 246, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(149, 246, 255, 0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: grid-pan 80s linear infinite;
+    z-index: 1; /* Sits behind shapes */
+}
+
+/* Faded vignette effect */
+.LeaderboardPage::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 60%, var(--theme-bg) 95%);
+    z-index: 3; /* Sits on top of shapes */
+    pointer-events: none;
+}
+
+.LeaderboardComponent, .leaderboard-skeleton {
+    position: relative;
+    z-index: 4; /* Content is on the top layer */
+}
+
+
+/* --- FLOATING BACKGROUND SHAPES --- */
+.background-shapes {
+    position: absolute;
+    inset: 0;
+    z-index: 2; /* Between grid and content */
+    perspective: 800px;
+}
+
+.floating-shape {
+    position: absolute;
+    border: 2px solid var(--theme-leaderboard);
+    box-shadow: 0 0 20px 5px var(--theme-glow);
+    opacity: 0.15;
+    animation: float-rotate linear infinite;
+}
+/* Randomize size, position, and speed for each shape */
+.floating-shape:nth-child(1) {
+    width: 150px; height: 150px;
+    left: 10%;
+    animation-duration: 40s;
+}
+.floating-shape:nth-child(2) {
+    width: 80px; height: 80px;
+    left: 30%;
+    animation-duration: 30s;
+    animation-delay: -10s;
+}
+.floating-shape:nth-child(3) {
+    width: 200px; height: 200px;
+    left: 50%;
+    animation-duration: 50s;
+    animation-delay: -25s;
+}
+.floating-shape:nth-child(4) {
+    width: 100px; height: 100px;
+    left: 70%;
+    animation-duration: 35s;
+    animation-delay: -5s;
+}
+.floating-shape:nth-child(5) {
+    width: 120px; height: 120px;
+    left: 90%;
+    animation-duration: 45s;
+    animation-delay: -15s;
+}.floating-shape:nth-child(6) {
+    width: 60px; height: 60px;
+    left: 40%;
+    animation-duration: 28s;
+    animation-delay: -20s;
+}
+.floating-shape:nth-child(7) {
+    width: 180px; height: 180px;
+    left: 80%;
+    animation-duration: 55s;
+    animation-delay: -3s;
+}
+
+.floating-shape:nth-child(8) {
+    width: 90px; height: 90px;
+    left: 20%;
+    animation-duration: 32s;
+    animation-delay: -12s;
+}
+
+
+/* --- SKELETON LOADER --- */
+.leaderboard-skeleton {
+  max-width: 900px;
+  margin: 2rem auto;
+}
+.skeleton-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(90deg, 
+    rgba(31, 26, 48, 0.4) 25%, 
+    rgba(50, 45, 70, 0.6) 50%, 
+    rgba(31, 26, 48, 0.4) 75%
+  );
+  background-size: 2000px 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+.skeleton-pos { width: 40px; height: 40px; border-radius: 4px; background: rgba(255,255,255,0.05); }
+.skeleton-avatar { width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.05); }
+.skeleton-name { flex-grow: 1; height: 30px; border-radius: 4px; background: rgba(255,255,255,0.05); }
+.skeleton-playtime { width: 100px; height: 30px; border-radius: 4px; background: rgba(255,255,255,0.05); }
+

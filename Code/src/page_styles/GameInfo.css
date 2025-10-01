@@ -1,13 +1,206 @@
-.GameInfo {
-  margin-top: 64px;
-  min-height: 100vh;
+/* GameInfoComponent.css */
+/* Make sure to use the same theme variables from your main CSS file */
+:root {
+  --primary-glow: #ff73a4;
+  --secondary-glow: #64faff;
+  --background-dark: #0d0c1d;
+  --text-light: #f0f0f0;
+  --font-special: 'Tektur', sans-serif;
+  --border-radius: 12px;
+}
+
+.game-info-card {
+  position: relative;
+  padding: 1.5rem 2rem 2rem;
+  color: var(--text-light);
+  
+  /* The "frosted glass" effect for the modal content */
+  background: rgba(20, 15, 40, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  
+  /* Add a subtle glow to the card itself */
+  animation: modalGlow 3s infinite alternate;
+}
+
+@keyframes modalGlow {
+  from { box-shadow: 0 0 15px -5px rgba(100, 250, 255, 0.4); }
+  to { box-shadow: 0 0 25px -5px rgba(255, 115, 164, 0.5); }
+}
+
+/* --- Close Button --- */
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  font-size: 20px;
+  line-height: 35px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.close-button:hover {
+  background: var(--primary-glow);
+  transform: rotate(90deg);
+}
+
+/* --- Banner & Details --- */
+.game-banner {
+  width: 100%;
+  height: 250px;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.game-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.game-details {
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
-  background-image: url('../assets/Game-infoBackground.jpg'); 
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: #0E0216;
-  overflow-x: hidden;
+  gap: 1rem;
+}
+
+.game-name {
+  font-family: var(--font-special);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--secondary-glow);
+  text-shadow: 0 0 10px var(--secondary-glow);
+  margin: 0;
+}
+
+/* --- Tags --- */
+.game-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  background-color: rgba(255, 255, 255, 0.15);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* --- Stats (Rating & Likes) --- */
+.game-stats {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.star-rating .star {
+  font-size: 1.2rem;
+  color: #555;
+}
+.star-rating .star.filled {
+  color: #ffc700;
+  text-shadow: 0 0 5px #ffc700;
+}
+.heart-icon {
+  color: var(--primary-glow);
+  font-size: 1.2rem;
+}
+
+
+/* --- Description & About --- */
+.game-description, .game-about p {
+  line-height: 1.6;
+  color: #ccc;
+}
+.game-about h2 {
+  font-family: var(--font-special);
+  color: var(--secondary-glow);
+  border-bottom: 1px solid var(--secondary-glow);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+
+/* --- Play Button --- */
+.play-button {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: var(--border-radius);
+  font-family: var(--font-special);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+  background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+  background-size: 200% 100%;
+  transition: all 0.4s ease-in-out;
+  box-shadow: 0 0 20px rgba(255, 115, 164, 0.5);
+}
+
+.play-button:hover {
+  background-position: 100% 0;
+  box-shadow: 0 0 30px rgba(100, 250, 255, 0.8);
+}
+/* In GameInfoComponent.css or equivalent */
+
+.star-rating .star {
+  color: #555; /* Color for an empty star */
+  font-size: 1.2rem;
+  position: relative;
+  display: inline-block;
+}
+
+.star-rating .star.filled {
+  color: #ffc700; /* Color for a full star */
+  text-shadow: 0 0 5px #ffc700;
+}
+
+/* The magic for the half-star effect */
+.star-rating .star.half {
+  color: #ffc700;
+  display: inline-block;
+  position: relative;
+}
+
+.star-rating .star.half::before {
+  content: '★';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+  overflow: hidden;
+  color: #ffc700; /* Color of the filled half */
+}
+
+.star-rating .star.half::after {
+    content: '★';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+    overflow: hidden;
+    color: #555; /* Color of the empty half */
 }

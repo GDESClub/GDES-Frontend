@@ -1,36 +1,303 @@
+/* --- THEME & KEYFRAMES --- */
+:root {
+  --theme-home-primary: #79FFB6;
+  --theme-home-glow: rgba(121, 255, 182, 0.6);
+  --theme-bg: #0E0216;
+  --mouse-x: 50vw;
+  --mouse-y: 50vh;
+}
+
+@keyframes holographic-glitch {
+  2%,64% { transform: translate(2px, -1px) skew(0deg); }
+  4%,60% { transform: translate(-2px, 1px) skew(0deg); }
+  62% { transform: translate(0,0) skew(3deg); }
+}
+
+/* NEW: Seamless vertical scrolling animation for the starfield */
+@keyframes stars-pan {
+  from { background-position: 0 0; }
+  to { background-position: 0 2000px; } /* Seamless loop */
+}
+
+/* NEW: Animation for the shooting stars */
+@keyframes shooting-star-anim {
+    0% { transform: translate(-100vw, -50vh) scale(0.5); opacity: 1; }
+    99% { transform: translate(100vw, 50vh) scale(1.2); opacity: 1; }
+    100% { transform: translate(100vw, 50vh) scale(1.2); opacity: 0; }
+}
+
+/* NEW: Breathing glow effect for the CTA button */
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 10px -2px var(--theme-home-glow); }
+    50% { box-shadow: 0 0 20px 5px var(--theme-home-glow); }
+}
+
+/* --- MAIN PAGE & DYNAMIC BACKGROUND --- */
 .HomePage {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-image: url('../assets/home_background.png'); /* Replace with your home background */
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  background-color: var(--theme-bg);
   color: #ECF5FF;
   position: relative;
   overflow: hidden;
 }
 
-/* Semi-transparent overlay for fade effect */
-.HomePage::before {
-  content: "";
+.home-bg-glow {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(121, 255, 182, 0.15) 0%, transparent 40%);
+    z-index: 0;
+    transition: background 0.1s linear;
+}
+
+/* NEW: Container for all animated background elements */
+.background-effects {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+}
+
+/* Starfield background */
+#stars, #stars2, #stars3 {
   position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5); /* adjust opacity */
-  z-index: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+  background-repeat: repeat;
 }
 
-/* Make sure all direct children (Navbar, main, Footer) appear above overlay */
-.HomePage > * {
-  position: relative;
-  z-index: 1;
+#stars {
+  animation: stars-pan 200s linear infinite;
+  background-size: auto;
+}
+#stars2 {
+  animation: stars-pan 120s linear infinite;
+  animation-delay: -10s;
+  background-size: auto;
+  opacity: 0.7;
+}
+#stars3 {
+  animation: stars-pan 80s linear infinite;
+  animation-delay: -5s;
+  background-size: auto;
+  opacity: 0.5;
 }
 
-/* Keep main content flexible, grows to fill space */
-main {
+/* NEW: Shooting Star styles */
+.shooting-star-container {
+    position: absolute;
+    inset: 0;
+    transform: rotate(30deg); /* Angle the comets */
+}
+.shooting-star {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(-45deg, var(--theme-home-primary), transparent);
+    border-radius: 999px;
+    filter: drop-shadow(0 0 6px var(--theme-home-primary));
+    animation: shooting-star-anim 10s ease-in-out infinite;
+    opacity: 0;
+}
+.shooting-star:nth-child(2) {
+    top: 20%;
+    animation-delay: 3s;
+    animation-duration: 12s;
+}
+.shooting-star:nth-child(3) {
+    top: 80%;
+    animation-delay: 7s;
+    animation-duration: 8s;
+}
+
+main.home-content {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* --- HERO SECTION --- */
+.home-hero {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 5rem;
+  box-sizing: border-box;
+}
+
+/* HOLOGRAPHIC TITLE */
+.hero-title {
+  font-family: 'Tektur', sans-serif;
+  font-weight: 700;
+  font-size: clamp(4rem, 10vw, 8rem);
+  line-height: 1.1; 
+  letter-spacing: 0.1em;
+  color: var(--theme-home-primary);
+  text-align: left;
+  margin: 0;
+  position: relative;
+  animation: holographic-glitch 4s infinite linear alternate-reverse;
+}
+.hero-title::before, .hero-title::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.hero-title::before {
+    left: 2px;
+    text-shadow: -2px 0 #FF73A4;
+    mix-blend-mode: screen;
+}
+.hero-title::after {
+    left: -2px;
+    text-shadow: -2px 0 #95F6FF, 2px 2px #FF73A4;
+    mix-blend-mode: screen;
+}
+
+/* DESCRIPTION */
+.hero-description {
+  font-family: 'Neue Montreal', sans-serif;
+  font-weight: 400;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  letter-spacing: 0.5px;
+  margin-top: 2rem;
+  max-width: 60ch;
+  color: #ccc;
+  min-height: 100px;
+}
+
+/* FUTURISTIC CTA BUTTON */
+.hero-cta {
+  margin-top: 2rem;
+  position: relative;
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  color: var(--theme-home-primary);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 1rem;
+  text-decoration: none;
+  overflow: hidden;
+  transition: 0.2s;
+  background: rgba(121, 255, 182, 0.1);
+  border: 1px solid var(--theme-home-primary);
+  /* NEW: Use the pulse animation */
+  animation: pulse-glow 3s infinite;
+}
+.hero-cta:hover {
+  color: var(--theme-bg);
+  background: var(--theme-home-primary);
+  animation-play-state: paused; /* Pause pulse on hover for a different effect */
+  box-shadow: 0 0 20px 5px var(--theme-home-glow);
+}
+.hero-cta svg {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) translateX(-20px);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+.hero-cta:hover span {
+  transform: translateX(-10px);
+}
+.hero-cta:hover svg {
+  transform: translateY(-50%) translateX(0);
+  opacity: 1;
+}
+.hero-cta span, .hero-cta svg {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+.hero-cta svg path, .hero-cta svg polyline {
+    stroke: var(--theme-bg);
+    stroke-width: 2;
+}
+
+
+/* --- RESPONSIVENESS --- */
+@media (max-width: 768px) {
+    .home-hero {
+        align-items: center;
+        text-align: center;
+        padding: 0 1.5rem;
+    }
+    .hero-description {
+        max-width: 90%;
+    }
+}
+
+.shooting-star {
+    position: absolute;
+    width: 250px; /* Long tail for the star */
+    height: 2px;
+    background: linear-gradient(to left, var(--theme-home-primary), transparent);
+    border-radius: 999px;
+    filter: drop-shadow(0 0 8px var(--theme-home-primary));
+    animation: shooting-star-anim 5s ease-in infinite;
+    opacity: 0; /* Hidden until animation starts */
+    left: -250px; /* Start completely off-screen */
+}
+
+.shooting-star:nth-child(1) {
+    top: 85%;
+    animation-duration: 6s;
+    animation-delay: 0s;
+}
+.shooting-star:nth-child(2) {
+    top: 50%;
+    animation-duration: 4s;
+    animation-delay: 2.5s;
+}
+.shooting-star:nth-child(3) {
+    top: 15%;
+    animation-duration: 5.5s;
+    animation-delay: 5s;
+}
+
+.digital-rain-container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.rain-column {
+    writing-mode: vertical-rl;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1rem;
+    color: var(--theme-home-primary);
+    text-shadow: 0 0 8px var(--theme-home-glow);
+    animation: rain-fall linear infinite;
+    user-select: none;
+}
+@keyframes shooting-star-anim {
+    0% {
+        transform: translateX(0) translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(150vw) translateY(150px);
+        opacity: 0;
+    }
+}
+@keyframes rain-fall {
+  from { transform: translateY(-100vh); }
+  to { transform: translateY(100vh); }
 }

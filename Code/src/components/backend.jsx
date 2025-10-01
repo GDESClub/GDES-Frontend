@@ -1,0 +1,1 @@
+export const BACKENDURL = "https://gdesbackend.vercel.app/"

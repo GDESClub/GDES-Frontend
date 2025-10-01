@@ -1,0 +1,120 @@
+:root {
+  --theme-primary: #FF73A4;
+  --theme-glow: rgba(255, 115, 164, 0.6);
+  --theme-bg: #0E0216;
+  --navbar-height: 68px; /* Assuming your navbar is 68px tall */
+}
+
+/* This container now fills the viewport BELOW the navbar */
+.game-player-page {
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  padding-top: var(--navbar-height); /* Push content down */
+  box-sizing: border-box;
+  background-color: var(--theme-bg);
+  display: flex; /* Use flex to make the iframe fill remaining space */
+  position: relative;
+}
+
+/* The back button is now fixed relative to the viewport */
+.game-back-button {
+  position: fixed;
+  top: calc(var(--navbar-height) + 20px); /* Position below the navbar */
+  left: 20px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(14, 2, 22, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--theme-primary);
+  color: var(--theme-primary);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.game-back-button:hover {
+  background: var(--theme-primary);
+  color: var(--theme-bg);
+  box-shadow: 0 0 20px var(--theme-glow);
+}
+
+/* The iframe now grows to fill the available space */
+.game-iframe {
+  flex-grow: 1; /* This is the key to filling the height */
+  width: 100%;
+  height: 100%;
+  border: none;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+.game-iframe.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* The overlays now also respect the navbar's height */
+.loading-overlay, .error-overlay {
+  position: absolute;
+  top: var(--navbar-height); /* Start below the navbar */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  color: #fff;
+  text-align: center;
+}
+
+.loading-text {
+  margin-top: 1.5rem;
+  font-family: 'Tektur', sans-serif;
+  letter-spacing: 2px;
+  color: var(--theme-primary);
+  text-shadow: 0 0 10px var(--theme-glow);
+  animation: flicker 2s infinite alternate;
+}
+
+@keyframes flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    text-shadow: 0 0 4px var(--theme-primary), 0 0 11px var(--theme-primary), 0 0 19px var(--theme-glow);
+    color: var(--theme-primary);
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+    color: #333;
+  }
+}
+
+.loader {
+  width: 80px;
+  height: 80px;
+  border: 4px solid var(--theme-primary);
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+  box-shadow: 0 0 15px var(--theme-glow);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.error-title {
+  font-family: 'Tektur', sans-serif;
+  font-size: 2rem;
+  color: #ff4d4d;
+}
+.error-message {
+  font-size: 1rem;
+  color: #ccc;
+  max-width: 80%;
+}
+

@@ -1,26 +1,141 @@
+/* --- THEME & KEYFRAMES --- */
+:root {
+  --theme-footer-primary: #79FFB6; 
+  --theme-footer-glow: rgba(121, 255, 182, 0.6);
+  --theme-bg: #0E0216;
+}
+
+@keyframes draw-line { from { stroke-dashoffset: 1000; } to { stroke-dashoffset: 0; } }
+@keyframes pulse-glow-strong { 0%, 100% { box-shadow: 0 0 8px 1px var(--theme-footer-glow); } 50% { box-shadow: 0 0 16px 4px var(--theme-footer-glow); } }
+@keyframes flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+  20%, 24%, 55% { opacity: 0.6; }
+}
+@keyframes noise {
+  0%, 100% { transform: translate(0, 0); } 10% { transform: translate(-5%, -10%); } 20% { transform: translate(-15%, 5%); } 30% { transform: translate(7%, -25%); } 40% { transform: translate(-5%, 25%); } 50% { transform: translate(-15%, 10%); } 60% { transform: translate(15%, 0%); } 70% { transform: translate(0%, 15%); } 80% { transform: translate(3%, 35%); } 90% { transform: translate(-10%, 10%); }
+}
+
+/* --- FOOTER LAYOUT --- */
 .Footer {
   width: 100%;
-  padding: 1rem 0rem;
-  margin-left: 20px;
+  position: relative;
+  padding: 0 2rem;
+  box-sizing: border-box;
+  margin-top: 4rem;
+  height: 60px; /* Give it a fixed height */
+  display: flex;
+  align-items: center;
   overflow: hidden;
 }
 
-.footer-line-group {
-  display: inline-flex;
-  align-items: flex-start;
-  width: 97%;
-  gap: 0;
+/* Animated noise background effect */
+.footer-bg-noise {
+    position: absolute;
+    top: -100%; left: -50%;
+    width: 200%; height: 300%;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMDAgMzAwIj48ZmlsdGVyIGlkPSJzIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjciIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjc2gpIiBvcGFjaXR5PSIwLjAzNSIvPjwvc3ZnPg==');
+    animation: noise 8s steps(10) infinite;
+    z-index: 0;
+}
+
+/* Grid layout for footer content */
+.footer-grid {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr; /* Left, Center, Right */
+    align-items: center;
+    gap: 2rem;
+}
+
+.footer-left, .footer-right, .footer-center {
+    position: relative;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+.footer-right { justify-content: flex-end; }
+.footer-center { justify-content: center; }
+
+/* --- SVG STYLING & ANIMATIONS --- */
+.footer-deco-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+.footer-right .footer-deco-svg {
+    left: auto;
+    right: 0;
 }
 
 .footer-line {
-  height: 19px;
-  flex-grow: 1;
-  display: block;
+  stroke: var(--theme-footer-primary);
+  stroke-width: 1px;
+  fill: none;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw-line 2s ease-out forwards;
+  filter: drop-shadow(0 0 5px var(--theme-footer-glow));
+}
+.footer-dot {
+    fill: var(--theme-footer-primary);
+    filter: drop-shadow(0 0 5px var(--theme-footer-glow));
+    animation: flicker 2s infinite alternate;
 }
 
-.footer-icon {
-  width: 33px;
-  height: 19px;
-  display: block;
-  flex-shrink: 1;
+/* --- FOOTER CONTENT --- */
+.footer-text {
+  margin: 0;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.8rem;
+  color: #888;
+  text-transform: uppercase;
+  white-space: nowrap;
+  animation: flicker 3s infinite;
 }
+.footer-left .footer-text { padding-left: 1rem; }
+.footer-right .footer-text { padding-right: 1rem; }
+
+.status {
+  color: var(--theme-footer-primary);
+  text-shadow: 0 0 8px var(--theme-footer-glow);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--theme-footer-primary);
+  box-shadow: 0 0 10px 2px var(--theme-footer-glow);
+  animation: pulse-glow-strong 2s infinite alternate;
+}
+
+/* --- RESPONSIVENESS --- */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .footer-left, .footer-right, .footer-center {
+        justify-content: center;
+    }
+    .footer-deco-svg {
+        display: none; /* Hide complex SVGs on mobile */
+    }
+    .footer-left .footer-text, .footer-right .footer-text {
+        padding: 0;
+    }
+    .version {
+        display: none; /* Hide version number on mobile */
+    }
+}
+

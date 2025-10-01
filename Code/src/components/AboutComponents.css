@@ -1,122 +1,149 @@
-.about-section {
-  margin-left: 2rem;
-}
+/* ... (existing styles for .about-section, .section-header, etc. can remain) ... */
 
-.about-section p {
-  margin-right: 3rem;
-  color: #a8a2ff;
-  line-height: 1.6;
-  font-size: 0.95rem;
-  margin-left: 3rem;
-}
-
-.credits-section {
-  margin-top: 0.5rem;
-  margin-left: 2rem;
-}
-
-.credits-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 0.1rem;
-  color: #a8a2ff;
-  font-family: "Neue-Montreal", sans-serif;
-  font-size: 0.9rem;
-  margin-left: 3rem;
-}
-
+/* --- MEMBERS SECTION & CARDS --- */
 .members-section {
-  margin-left: 2rem;
+    /* (your existing glass panel styles) */
+    background: linear-gradient(135deg, rgba(31, 26, 48, 0.2), rgba(31, 26, 48, 0.6));
+    border: 1px solid rgba(168, 162, 255, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 40px rgba(168, 162, 255, 0.1);
 }
 
-.member-cards-container {
-  display: flex;
-  overflow-x: hidden;
-  flex-wrap: wrap;
-  gap: 1rem;
-  padding-left: 0.3rem;
-  padding-bottom: 1rem;
-  padding-top: 0.5rem;
-  margin-left: 3rem;
+/* NEW: Leadership Section Layout */
+.leadership-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(168, 162, 255, 0.2);
 }
 
 .member-card {
-  flex: 0 0 auto;
+  position: relative;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0; /* Important for carousel items */
   width: 120px;
-  height: 120px;
-  text-align: center;
-  margin-bottom: 3rem;
-  background: rgba(0, 0, 0, 0.5), linear-gradient(45deg, #222, #444);
-  transition: transform 0.2s ease;
+}
+
+/* NEW: Larger style for featured cards */
+.member-card.featured {
+    width: 150px;
 }
 
 .member-box {
-  width: 118px;
-  height: 118px;
-  top: 1px;
-  left: 1px;
-  border-radius: 3px;
-  clip-path: polygon(0% 0%, 64% 0%, 100% 36%, 100% 100%, 0% 100%);
-  background-image: url("../assets/test.png");
-  background-size: cover;
-  background-position: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  transition: transform 0.3s ease;
 }
 
-.member-box:hover path{
-  stroke: #79ffb6;
+.member-box .avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.3s ease;
 }
 
-.member-card:hover {
-  transform: scale(1.1);
+.member-box .border {
+    position: absolute;
+    inset: 0;
+    stroke: var(--theme-about-primary, #A8A2FF);
+    stroke-width: 2px;
+    fill: none;
+    filter: drop-shadow(0 0 8px var(--theme-about-glow, rgba(168, 162, 255, 0.6)));
+    opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
+.member-card:hover .member-box .border {
+    stroke-width: 3px;
+    opacity: 1;
+}
+.member-card:hover .member-box .avatar {
+    filter: brightness(1.2);
 }
 
 .member-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  margin-top: auto;
+  position: relative;
+  text-align: center;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  pointer-events: none; /* Allows hover to pass through to card */
+}
+
+/* Show info by default on larger featured cards */
+.member-card.featured .member-info {
+    opacity: 1;
+    transform: translateY(75px); /* Position below the hexagon */
+}
+
+.member-card:not(.featured):hover .member-info {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .member-info p {
   margin: 0;
-  color: #aaaaff;
-  font-weight: bold;
-  text-align: right;
+  font-weight: 600;
+  text-shadow: 0 0 5px #000;
 }
-
 .member-info span {
-  font-size: 0.9rem;
-  color: #aaaaff;
-  text-align: right;
+  font-size: 0.8rem;
+  color: #ccc;
+  text-shadow: 0 0 5px #000;
 }
 
-.socials-section {
-  margin-left: 2rem;
+/* --- NEW: Members Carousel --- */
+.members-carousel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
-.socials-section ul {
-  list-style: none;
-  padding: 0;
+.member-cards-container {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 1rem 0;
+  /* Hide scrollbar */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.member-cards-container::-webkit-scrollbar {
+  display: none;
 }
 
-.socials-section li {
-  margin-bottom: 1rem;
-  margin-left: 3rem;
+.carousel-nav-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(31, 26, 48, 0.8);
+    border: 1px solid rgba(168, 162, 255, 0.3);
+    color: var(--theme-about-primary, #A8A2FF);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
 }
+.carousel-nav-btn:hover {
+    background: var(--theme-about-primary, #A8A2FF);
+    color: var(--theme-bg, #0E0216);
+    box-shadow: 0 0 10px var(--theme-about-glow, rgba(168, 162, 255, 0.6));
+}
+.carousel-nav-btn.left { margin-right: 1rem; }
+.carousel-nav-btn.right { margin-left: 1rem; }
 
-.socials-section a {
-  color: #79ffb6;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.socials-section a:hover {
-  color: #95f6ff;
-}
-
-.social-icon{
-  width: 20px;
-  height: 20px;
-  vertical-align: middle;
-  margin-right: 0.5rem;
-}

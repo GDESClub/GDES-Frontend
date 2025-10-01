@@ -2,7 +2,7 @@ import React from "react";
 import LeaderboardTags from "./LeaderboardTags";
 import './LeaderboardComponent.css';
 
-export default function LeaderboardComponent({data}) {
+export default function LeaderboardComponent({ data, onSearchChange }) {
     return (
        <div className="LeaderboardComponent">
             <div className="Leaderbord-Heading-Container">
@@ -14,51 +14,38 @@ export default function LeaderboardComponent({data}) {
                     <svg className="mag-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
                         <path d="M10 18c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8c0 1.657-.506 3.194-1.368 4.451l5.459 5.459-1.414 1.414-5.459-5.459A7.963 7.963 0 0 1 10 18zM4 10c0 3.309 2.691 6 6 6s6-2.691 6-6-2.691-6-6-6-6 2.691-6 6z" fill="#EAEAEA" opacity="0.5"/>
                     </svg>
-                    <input className="angled-input" type="text" placeholder="search username" />
+                    <input 
+                        className="angled-input" 
+                        type="text" 
+                        placeholder="Search username" 
+                        onChange={(e) => onSearchChange(e.target.value)}
+                    />
                 </div>
             </div>
+            
             <div className="Leaderboard-Subheading-Container">
-                <div className="arrow-container">
-                    <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 40 40" fill="none" className="arrow">
-                        <mask id="path-1-inside-1_1_191" fill="white">
-                            <path d="M27.7314 19.04L11.7168 3.02539L3.04102 11.7002L19.0723 27.7314H0V40H40V31.3096H40.001L40 31.3086V0H27.7314V19.04Z"/>
-                        </mask>
-                        <path d="M27.7314 19.04H28.7314V21.4543L27.0243 19.7471L27.7314 19.04ZM11.7168 3.02539L11.0097 2.31824L11.7168 1.61122L12.4239 2.31828L11.7168 3.02539ZM3.04102 11.7002L2.33391 12.4073L1.62676 11.7002L2.33395 10.993L3.04102 11.7002ZM19.0723 27.7314L19.7794 27.0243L21.4865 28.7314H19.0723V27.7314ZM0 27.7314H-1V26.7314H0V27.7314ZM0 40V41H-1V40H0ZM40 40H41V41H40V40ZM40 31.3096H39V30.3096H40V31.3096ZM40.001 31.3096L40.7081 30.6025L42.4152 32.3096H40.001V31.3096ZM40 31.3086L39.2929 32.0157L39 31.7228V31.3086H40ZM40 0V-1H41V0H40ZM27.7314 0H26.7314V-1H27.7314V0ZM27.7314 19.04L27.0243 19.7471L11.0097 3.7325L11.7168 3.02539L12.4239 2.31828L28.4386 18.3329L27.7314 19.04ZM11.7168 3.02539L12.4239 3.73254L3.74808 12.4073L3.04102 11.7002L2.33395 10.993L11.0097 2.31824L11.7168 3.02539ZM3.04102 11.7002L3.74812 10.9931L19.7794 27.0243L19.0723 27.7314L18.3652 28.4386L2.33391 12.4073L3.04102 11.7002ZM19.0723 27.7314V28.7314H0V27.7314V26.7314H19.0723V27.7314ZM0 27.7314H1V40H0H-1V27.7314H0ZM0 40V39H40V40V41H0V40ZM40 40H39V31.3096H40H41V40H40ZM40 31.3096V30.3096H40.001V31.3096V32.3096H40V31.3096ZM40.001 31.3096L39.2939 32.0167L39.2929 32.0157L40 31.3086L40.7071 30.6015L40.7081 30.6025L40.001 31.3096ZM40 31.3086H39V0H40H41V31.3086H40ZM40 0V1H27.7314V0V-1H40V0ZM27.7314 0H28.7314V19.04H27.7314H26.7314V0H27.7314Z" fill="#79FFB6" mask="url(#path-1-inside-1_1_191)"/>
-                    </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 40 40" fill="none" className="arrow">
-                        <mask id="path-1-inside-1_1_191" fill="white">
-                            <path d="M27.7314 19.04L11.7168 3.02539L3.04102 11.7002L19.0723 27.7314H0V40H40V31.3096H40.001L40 31.3086V0H27.7314V19.04Z"/>
-                        </mask>
-                        <path d="M27.7314 19.04H28.7314V21.4543L27.0243 19.7471L27.7314 19.04ZM11.7168 3.02539L11.0097 2.31824L11.7168 1.61122L12.4239 2.31828L11.7168 3.02539ZM3.04102 11.7002L2.33391 12.4073L1.62676 11.7002L2.33395 10.993L3.04102 11.7002ZM19.0723 27.7314L19.7794 27.0243L21.4865 28.7314H19.0723V27.7314ZM0 27.7314H-1V26.7314H0V27.7314ZM0 40V41H-1V40H0ZM40 40H41V41H40V40ZM40 31.3096H39V30.3096H40V31.3096ZM40.001 31.3096L40.7081 30.6025L42.4152 32.3096H40.001V31.3096ZM40 31.3086L39.2929 32.0157L39 31.7228V31.3086H40ZM40 0V-1H41V0H40ZM27.7314 0H26.7314V-1H27.7314V0ZM27.7314 19.04L27.0243 19.7471L11.0097 3.7325L11.7168 3.02539L12.4239 2.31828L28.4386 18.3329L27.7314 19.04ZM11.7168 3.02539L12.4239 3.73254L3.74808 12.4073L3.04102 11.7002L2.33395 10.993L11.0097 2.31824L11.7168 3.02539ZM3.04102 11.7002L3.74812 10.9931L19.7794 27.0243L19.0723 27.7314L18.3652 28.4386L2.33391 12.4073L3.04102 11.7002ZM19.0723 27.7314V28.7314H0V27.7314V26.7314H19.0723V27.7314ZM0 27.7314H1V40H0H-1V27.7314H0ZM0 40V39H40V40V41H0V40ZM40 40H39V31.3096H40H41V40H40ZM40 31.3096V30.3096H40.001V31.3096V32.3096H40V31.3096ZM40.001 31.3096L39.2939 32.0167L39.2929 32.0157L40 31.3086L40.7071 30.6015L40.7081 30.6025L40.001 31.3096ZM40 31.3086H39V0H40H41V31.3086H40ZM40 0V1H27.7314V0V-1H40V0ZM27.7314 0H28.7314V19.04H27.7314H26.7314V0H27.7314Z" fill="#79FFB6" mask="url(#path-1-inside-1_1_191)"/>
-                    </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none" className="arrow">
-                        <mask id="path-1-inside-1_1_191" fill="white">
-                            <path d="M27.7314 19.04L11.7168 3.02539L3.04102 11.7002L19.0723 27.7314H0V40H40V31.3096H40.001L40 31.3086V0H27.7314V19.04Z"/>
-                        </mask>
-                        <path d="M27.7314 19.04H28.7314V21.4543L27.0243 19.7471L27.7314 19.04ZM11.7168 3.02539L11.0097 2.31824L11.7168 1.61122L12.4239 2.31828L11.7168 3.02539ZM3.04102 11.7002L2.33391 12.4073L1.62676 11.7002L2.33395 10.993L3.04102 11.7002ZM19.0723 27.7314L19.7794 27.0243L21.4865 28.7314H19.0723V27.7314ZM0 27.7314H-1V26.7314H0V27.7314ZM0 40V41H-1V40H0ZM40 40H41V41H40V40ZM40 31.3096H39V30.3096H40V31.3096ZM40.001 31.3096L40.7081 30.6025L42.4152 32.3096H40.001V31.3096ZM40 31.3086L39.2929 32.0157L39 31.7228V31.3086H40ZM40 0V-1H41V0H40ZM27.7314 0H26.7314V-1H27.7314V0ZM27.7314 19.04L27.0243 19.7471L11.0097 3.7325L11.7168 3.02539L12.4239 2.31828L28.4386 18.3329L27.7314 19.04ZM11.7168 3.02539L12.4239 3.73254L3.74808 12.4073L3.04102 11.7002L2.33395 10.993L11.0097 2.31824L11.7168 3.02539ZM3.04102 11.7002L3.74812 10.9931L19.7794 27.0243L19.0723 27.7314L18.3652 28.4386L2.33391 12.4073L3.04102 11.7002ZM19.0723 27.7314V28.7314H0V27.7314V26.7314H19.0723V27.7314ZM0 27.7314H1V40H0H-1V27.7314H0ZM0 40V39H40V40V41H0V40ZM40 40H39V31.3096H40H41V40H40ZM40 31.3096V30.3096H40.001V31.3096V32.3096H40V31.3096ZM40.001 31.3096L39.2939 32.0167L39.2929 32.0157L40 31.3086L40.7071 30.6015L40.7081 30.6025L40.001 31.3096ZM40 31.3086H39V0H40H41V31.3086H40ZM40 0V1H27.7314V0V-1H40V0ZM27.7314 0H28.7314V19.04H27.7314H26.7314V0H27.7314Z" fill="#79FFB6" mask="url(#path-1-inside-1_1_191)"/>
-                    </svg>
-                </div>
-                
-                <div className="username-heading">Username</div>
-                <div className="playtime-heading">Time played</div>
-                <div className="empty"></div>
-                
+                <div className="rank-heading">Rank</div>
+                <div className="username-heading">User</div>
+                <div className="playtime-heading">Activities</div>
             </div>
+
             <div className="Leaderboard-Container-wrapper">
                 <div className="Leaderboard-Container">
-                    {data.map((entry) => (
-                        <LeaderboardTags
-                            key={entry.pos}
-                            pos={entry.pos}
-                            img={entry.img}
-                            name={entry.name}
-                            playtime={entry.playtime}
-                        />
-                    ))}
+                    {data.length > 0 ? (
+                        data.map((entry) => (
+                            <LeaderboardTags
+                                key={entry.pos}
+                                pos={entry.pos}
+                                img={entry.img}
+                                name={entry.name}
+                                activityCount={entry.playtime} // Use a more descriptive prop name
+                            />
+                        ))
+                    ) : (
+                        <p className="no-results">No users found.</p>
+                    )}
                 </div>
             </div>
        </div>
     );
 }
-
-

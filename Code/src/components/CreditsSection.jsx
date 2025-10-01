@@ -2,7 +2,13 @@ import React from 'react';
 import SectionHeader from './SectionHeader';
 import './AboutComponents.css';
 
-const credits = new Array(28).fill({ name: 'Name', role: 'Role' });
+const credits = [
+    { name: 'QuantumDuck', role: 'Lead Developer' },
+    { name: 'DarkKnight', role: 'UI/UX Design' },
+    { name: 'LaserFalcon', role: 'Backend Engineer' },
+    { name: 'FrostHex', role: 'Frontend Dev' },
+    { name: 'IronPhantom', role: 'QA Tester' },
+];
 
 const CreditsSection = () => (
   <section className="credits-section">

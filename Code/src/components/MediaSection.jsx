@@ -1,48 +1,70 @@
 import { useRef, useState, useEffect } from "react";
-import "../components/MediaSection.css";
-import bannerImage from "../assets/placeholder.png";
-
-// --- Reusable Icon Components ---
+import "./MediaSection.css";
 
 const NavArrow = ({ direction }) => (
-    <svg width="26" height="26" viewBox="0 0 41 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {direction === 'left' ? (
-            <>
-                <path d="M16.8569 30.6985L2.00769 15.8492L16.8569 1" stroke="#FF73A4" strokeWidth="3" />
-                <path d="M25.8567 30.6985L11.0074 15.8492L25.8567 1" stroke="#FF73A4" strokeWidth="3" />
-            </>
-        ) : (
-            <>
-                <path d="M23.8506 30.6985L38.6998 15.8492L23.8506 1" stroke="#FF73A4" strokeWidth="3" />
-                <path d="M14.8506 30.6985L29.6998 15.8492L14.8506 1" stroke="#FF73A4" strokeWidth="3" />
-            </>
-        )}
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d={direction === 'left' ? "M15 18L9 12L15 6" : "M9 18L15 12L9 6"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
 );
 
 const StatsIcon = ({ type }) => {
     const icons = {
-        stars: <path d="M8.5 12.241L3.21546 16L5.29852 9.8864L0 6.1136H6.48684L8.5 0L10.5132 6.1136H17L11.7015 9.8864L13.7845 16L8.5 12.241Z" fill="#FF73A4" />,
-        plays: <path d="M0 12V0L10 6L0 12Z" fill="#FF73A4" />,
-        likes: <path d="M7.5 12L1.137 6.135C-0.041 4.965 -0.041 3.035 1.137 1.865C2.315 0.695 4.245 0.695 5.423 1.865L7.5 3.943L9.577 1.865C10.755 0.695 12.685 0.695 13.863 1.865C15.041 3.035 15.041 4.965 13.863 6.135L7.5 12Z" fill="#FF73A4" />
+        stars: <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2l-2.81 6.63L2 9.24l5.46 4.73L5.82 21z" />,
+        // NEW: Replaced the old "eye" icon with a cleaner "views" icon
+        views: <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8zm11 5c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5z" fillRule="evenodd" clipRule="evenodd"><circle cx="12" cy="12" r="3"/></path>
     };
-    const viewBoxes = { stars: "0 0 17 16", plays: "0 0 10 12", likes: "0 0 15 12" };
     return (
-        <svg width="14" height="14" viewBox={viewBoxes[type]} fill="none" xmlns="http://www.w3.org/2000/svg" className="stats-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="stats-icon" fill="currentColor">
             {icons[type]}
         </svg>
     );
 };
 
+// --- New Card Component with Parallax Logic ---
+const GameCard = ({ item, onClick }) => {
+    const cardRef = useRef(null);
 
-// --- Main Component ---
+    const handleMouseMove = (e) => {
+        if (!cardRef.current) return;
+        const { left, top, width, height } = cardRef.current.getBoundingClientRect();
+        const x = (e.clientX - left - width / 2) / (width / 2);
+        const y = (e.clientY - top - height / 2) / (height / 2);
 
-export const mediaSections = [
-    { title: "Recently Played", items: [{ name: "GettingStuartAndEd", stars: "15.8k", likes: "9.2k", plays: "30.1k" }, { name: "LittleGreenDinos", stars: "15.8k", likes: "9.2k", plays: "30.1k" }, { name: "MindSwapper", stars: "15.8k", likes: "9.2k", plays: "30.1k" }, { name: "PlayTest", stars: "15.8k", likes: "9.2k", plays: "30.1k" }] },
-    { title: "Trending Now", items: [{ name: "GettingStuartAndEd", stars: "15.8k", likes: "9.2k", plays: "30.1k" }, { name: "LittleGreenDinos", stars: "15.8k", likes: "9.2k", plays: "30.1k" }, { name: "MindSwapper", stars: "15.8k", likes: "9.2k", plays: "30.1k" }, { name: "PlayTest", stars: "15.8k", likes: "9.2k", plays: "30.1k" }] },
-    { title: "Featured", items: [{ name: "GettingStuartAndEd", stars: "15.8k", likes: "9.2k", plays: "30.1k" }, { name: "LittleGreenDinos", stars: "15.8k", likes: "9.2k", plays: "30.1k" }, { name: "MindSwapper", stars: "15.8k", likes: "9.2k", plays: "30.1k" }, { name: "PlayTest", stars: "15.8k", likes: "9.2k", plays: "30.1k" }] },
-    { title: "Latest Releases", items: [{ name: "GettingStuartAndEd", stars: "15.8k", likes: "9.2k", plays: "30.1k" }, { name: "LittleGreenDinos", stars: "15.8k", likes: "9.2k", plays: "30.1k" }, { name: "MindSwapper", stars: "15.8k", likes: "9.2k", plays: "30.1k" }, { name: "PlayTest", stars: "15.8k", likes: "9.2k", plays: "30.1k" }] }
-];
+        cardRef.current.style.setProperty('--rotate-y', `${x * 10}deg`);
+        cardRef.current.style.setProperty('--rotate-x', `${y * -10}deg`);
+    };
+
+    const handleMouseLeave = () => {
+        if (!cardRef.current) return;
+        cardRef.current.style.setProperty('--rotate-y', '0deg');
+        cardRef.current.style.setProperty('--rotate-x', '0deg');
+    };
+
+    // THE FIX: Provide a default value for visit_count to prevent errors
+    const visitCount = item.visit_count || 0;
+
+    return (
+        <div 
+            className="card" 
+            ref={cardRef}
+            onClick={() => onClick(item)}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+        >
+            <div className="card-background" style={{ backgroundImage: `url(${item.banner})` }}></div>
+            <div className="card-info">
+                <p className="card-title">{item.name}</p>
+                <div className="stats">
+                    <span><StatsIcon type="stars" /> {(item.rating || 0).toFixed(1)}</span>
+                    {/* Use the new "views" icon and the safe visitCount variable */}
+                    <span><StatsIcon type="views" /> {visitCount.toLocaleString()}</span>
+                </div>
+            </div>
+            <div className="card-glow"></div>
+        </div>
+    );
+};
+
 
 export const MediaSection = ({ title, items, onClick }) => {
     const scrollRef = useRef(null);
@@ -52,62 +74,47 @@ export const MediaSection = ({ title, items, onClick }) => {
     const checkScrollPosition = () => {
         if (!scrollRef.current) return;
         const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-        setAtStart(scrollLeft < 10); // A small buffer
-        setAtEnd(scrollLeft + clientWidth >= scrollWidth - 10); // A small buffer
+        setAtStart(scrollLeft < 10);
+        setAtEnd(scrollLeft + clientWidth >= scrollWidth - 10);
     };
 
     useEffect(() => {
+        checkScrollPosition();
         const currentRef = scrollRef.current;
-        currentRef?.addEventListener("scroll", checkScrollPosition, { passive: true });
-        checkScrollPosition(); // Initial check
-        return () => currentRef?.removeEventListener("scroll", checkScrollPosition);
+        if (currentRef) {
+            currentRef.addEventListener("scroll", checkScrollPosition, { passive: true });
+            window.addEventListener('resize', checkScrollPosition);
+        }
+        return () => {
+            if (currentRef) {
+                currentRef.removeEventListener("scroll", checkScrollPosition);
+                window.removeEventListener('resize', checkScrollPosition);
+            }
+        };
     }, [items]);
 
     const scroll = (direction) => {
         if (scrollRef.current) {
-            const offset = scrollRef.current.clientWidth * 0.7; // Scroll 70% of the visible width
+            const offset = scrollRef.current.clientWidth * 0.8;
             scrollRef.current.scrollBy({ left: direction === "left" ? -offset : offset, behavior: "smooth" });
         }
     };
+
+    const hasOverflow = scrollRef.current ? scrollRef.current.scrollWidth > scrollRef.current.clientWidth : false;
 
     return (
         <div className="media-section">
             <h2 className="section-title">{title}</h2>
             <div className="carousel-wrapper">
-                <button className="nav-btn left" onClick={() => scroll("left")} disabled={atStart} aria-label="Scroll Left">
-                    <NavArrow direction="left" />
-                </button>
-
+                {hasOverflow && <button className="nav-btn left" onClick={() => scroll("left")} disabled={atStart}><NavArrow direction="left" /></button>}
                 <div className="carousel" ref={scrollRef}>
-                    {items.map((item, index) => (
-                        <div className="card" key={index} onClick={() => {onClick(
-                            {
-                                banner: `thumbnails/${item.name}Thumb.jpg`, // to Change
-                                tags: ["Adventure", "Puzzle", "Multiplayer"], // to Change
-                                name: item.name.replace(/([A-Z])/g, ' $1').trim(),
-                                rating: 4.2,               // rating between 0 and 5 // to Change
-                                description: "Embark on an epic journey through mystical lands and solve challenging puzzles.", // to Change
-                                liked_count: 1284, // to Change
-                                about: "Mystic Quest is a fantasy adventure game where players explore dungeons, collect treasures, and battle mythical creatures." // to Change
-                            }
-                        )}}>
-                            <img className="thumbnail" src={`thumbnails/${item.name}Thumb.jpg`} alt="Game Thumbnail" width={200} height={100} />
-                            <div className="card-info">
-                                <p className="card-title">{item.name.replace(/([A-Z])/g, ' $1').trim()}</p>
-                                <div className="stats">
-                                    <span><StatsIcon type="stars" /> {item.stars}</span>
-                                    <span><StatsIcon type="plays" /> {item.plays}</span>
-                                    <span><StatsIcon type="likes" /> {item.likes}</span>
-                                </div>
-                            </div>
-                        </div>
+                    {items.map((item) => (
+                        <GameCard item={item} onClick={onClick} key={item._id || item.name} />
                     ))}
                 </div>
-
-                <button className="nav-btn right" onClick={() => scroll("right")} disabled={atEnd} aria-label="Scroll Right">
-                    <NavArrow direction="right" />
-                </button>
+                {hasOverflow && <button className="nav-btn right" onClick={() => scroll("right")} disabled={atEnd}><NavArrow direction="right" /></button>}
             </div>
         </div>
     );
 };
+

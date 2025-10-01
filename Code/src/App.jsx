@@ -7,7 +7,8 @@ import GamesPage from './pages/Games'
 import LeaderboardPage from './pages/Leaderboard'
 import GameInfo from './pages/GameInfo'
 import Navbar from "./components/Navbar";  
-import AuthFlow from "./components/AuthFlow";
+import GamePlayerPage from './pages/GamePlayerPage';
+import AuthModal from './components/AuthController';
 
 function App() {
   const [showAuth, setShowAuth] = useState(false);
@@ -26,10 +27,11 @@ function App() {
         <Route path='/games' element={<GamesPage />} />
         <Route path='/leaderboard' element={<LeaderboardPage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/play/:gameId" element={<GamePlayerPage />} />
       </Routes>
 
       {showAuth && (
-        <AuthFlow
+        <AuthModal
           onClose={() => setShowAuth(false)}
         />
       )}

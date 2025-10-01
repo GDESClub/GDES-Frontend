@@ -2,8 +2,15 @@ import React from 'react';
 import './ModalWrapper.css';
 
 function ModalWrapper({ children, onClose }) {
+    // This allows closing the modal by clicking the background, but not on the content itself
+    const handleOverlayClick = (e) => {
+        if (e.target === e.currentTarget) {
+            onClose();
+        }
+    };
+
     return (
-        <div className="modal-overlay">
+        <div className="modal-overlay" onClick={handleOverlayClick}>
             <div className="modal-content">
                 <button className="modal-close" onClick={onClose}>
                     ×
