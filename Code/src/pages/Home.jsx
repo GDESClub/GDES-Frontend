@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Footer from '/src/components/Footer.jsx';
-
-import '../page_styles/Home.css';
+import '../page_styles/home.css';
 import LandingAnimation from '../components/LandingAnimation';
 
 // Custom hook for the text scramble animation
