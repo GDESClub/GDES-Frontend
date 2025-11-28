@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Footer from '/src/components/Footer.jsx';
-import '/src/page_styles/Achievements.css';
+import '/src/page_styles/achievements.css';
 
 const achievementsData = [
     {
