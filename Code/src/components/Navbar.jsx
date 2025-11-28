@@ -12,14 +12,15 @@ const IconHome = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="non
 const IconGames = () => <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6.5" y="0.5" width="5" height="5" /><rect x="12.5" y="6.5" width="5" height="5" /><rect x="6.5" y="12.5" width="5" height="5" /><rect x="0.5" y="6.5" width="5" height="5" /></svg>;
 const IconLeaderboard = () => <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="13.4982" cy="13.5007" r="6.00668" transform="rotate(-45 13.4982 13.5007)" /><line x1="18.0154" y1="8.81332" x2="20.1318" y2="6.6969" /><line x1="18.4532" y1="17.7473" x2="20.5696" y2="19.8637" /><line x1="6.69625" y1="20.1325" x2="8.81267" y2="18.0161" /><line x1="7.13499" y1="6.42902" x2="9.25141" y2="8.54544" /></svg>;
 const IconAbout = () => <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="4.00002" cy="4.00002" r="3.50002" /><circle cx="4.00002" cy="12" r="3.50002" /><circle cx="12" cy="12" r="3.50002" /></svg>;
+const IconAchievements = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 15C15.866 15 19 11.866 19 8V3H5V8C5 11.866 8.13401 15 12 15Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M5 8C3.34315 8 2 6.65685 2 5C2 3.34315 3.34315 2 5 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M19 2C20.6569 2 22 3.34315 22 5C22 6.65685 20.6569 8 19 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M12 15V22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M8 22H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>;
 
 const navLinks = [
     { name: 'Home', path: '/', icon: <IconHome /> },
     { name: 'Games', path: '/games', icon: <IconGames /> },
     { name: 'Leaderboard', path: '/leaderboard', icon: <IconLeaderboard /> },
     { name: 'About Us', path: '/about', icon: <IconAbout /> },
+    { name: 'Hall of Fame', path: '/achievements', icon: <IconAchievements /> }, 
 ];
-
 function Navbar({ onLoginClick }) {
     const location = useLocation();
     const { userValue, logout } = useUserState();

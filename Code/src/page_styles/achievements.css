@@ -1,0 +1,197 @@
+/* --- VARIABLES & THEME --- */
+:root {
+  --theme-gold: #FFD700;
+  --theme-tech: #79FFB6;
+  --theme-esports: #FF73A4;
+  --theme-bg: #0E0216;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+}
+
+@keyframes slideUpFade {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* NEW: Shard rising animation */
+@keyframes shard-rise {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    20% { opacity: 0.5; }
+    80% { opacity: 0.5; }
+    100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}
+
+/* --- PAGE LAYOUT --- */
+.AchievementsPage {
+    background-color: var(--theme-bg);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    padding-top: 80px;
+}
+
+.achievements-bg-glow {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(255, 215, 0, 0.08) 0%, transparent 40%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.achievements-bg-grid {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 0;
+}
+
+/* --- NEW: GOLD SHARDS BACKGROUND --- */
+.achievement-particles {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.gold-shard {
+    position: absolute;
+    bottom: -50px;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(45deg, var(--theme-gold), transparent);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); /* Diamond shape */
+    opacity: 0;
+    animation: shard-rise 15s linear infinite;
+    filter: drop-shadow(0 0 5px var(--theme-gold));
+}
+
+/* Randomize the shards */
+.gold-shard:nth-child(1) { left: 15%; width: 15px; height: 15px; animation-duration: 12s; animation-delay: 0s; }
+.gold-shard:nth-child(2) { left: 30%; width: 30px; height: 30px; animation-duration: 18s; animation-delay: 5s; }
+.gold-shard:nth-child(3) { left: 50%; width: 10px; height: 10px; animation-duration: 10s; animation-delay: 2s; }
+.gold-shard:nth-child(4) { left: 65%; width: 25px; height: 25px; animation-duration: 15s; animation-delay: 8s; }
+.gold-shard:nth-child(5) { left: 85%; width: 18px; height: 18px; animation-duration: 14s; animation-delay: 1s; }
+.gold-shard:nth-child(6) { left: 40%; width: 22px; height: 22px; animation-duration: 20s; animation-delay: 10s; }
+
+
+.achievements-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* --- HEADER --- */
+.page-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.page-header h1 {
+    font-family: 'Tektur', sans-serif;
+    font-size: 4rem;
+    color: #fff;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    margin: 0;
+}
+
+.header-subtitle {
+    font-family: 'Roboto Mono', monospace;
+    color: var(--theme-tech);
+    letter-spacing: 2px;
+    margin-top: 0.5rem;
+}
+
+/* --- CARD GRID --- */
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* --- ACHIEVEMENT CARD --- */
+.achievement-card {
+    position: relative;
+    background: rgba(20, 20, 30, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: slideUpFade 0.6s ease-out backwards;
+    clip-path: polygon(
+        0 0, 
+        100% 0, 
+        100% calc(100% - 20px), 
+        calc(100% - 20px) 100%, 
+        0 100%
+    );
+}
+
+.achievement-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.card-corner {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, transparent 50%, rgba(255, 255, 255, 0.2) 50%);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.9rem;
+}
+
+.achievement-year {
+    color: #888;
+}
+
+.achievement-category {
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.achievement-category.technical { color: var(--theme-gold); border: 1px solid var(--theme-gold); background: rgba(255, 215, 0, 0.1); }
+.achievement-category.esports { color: var(--theme-esports); border: 1px solid var(--theme-esports); background: rgba(255, 115, 164, 0.1); }
+.achievement-category.software { color: var(--theme-tech); border: 1px solid var(--theme-tech); background: rgba(121, 255, 182, 0.1); }
+.achievement-category.community { color: #A8A2FF; border: 1px solid #A8A2FF; background: rgba(168, 162, 255, 0.1); }
+
+.achievement-title {
+    font-family: 'Tektur', sans-serif;
+    font-size: 1.5rem;
+    color: #fff;
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+}
+
+.achievement-desc {
+    color: #ccc;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .page-header h1 { font-size: 2.5rem; }
+    .achievements-grid { grid-template-columns: 1fr; }
+}
