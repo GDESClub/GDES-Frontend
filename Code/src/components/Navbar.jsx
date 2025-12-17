@@ -18,8 +18,8 @@ const navLinks = [
     { name: 'Home', path: '/', icon: <IconHome /> },
     { name: 'Games', path: '/games', icon: <IconGames /> },
     { name: 'Leaderboard', path: '/leaderboard', icon: <IconLeaderboard /> },
-    { name: 'About Us', path: '/about', icon: <IconAbout /> },
-    { name: 'Hall of Fame', path: '/achievements', icon: <IconAchievements /> }, 
+    { name: 'Hall of Fame', path: '/achievements', icon: <IconAchievements /> },
+    { name: 'About Us', path: '/about', icon: <IconAbout /> }, 
 ];
 function Navbar({ onLoginClick }) {
     const location = useLocation();

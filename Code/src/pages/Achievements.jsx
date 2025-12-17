@@ -41,9 +41,9 @@ const achievementsData = [
     {
         id: 6,
         year: "2022",
-        title: "Techniche Best Project",
+        title: "Techevince Best Project",
         category: "Software",
-        description: "Won 'Best Project under Software' at Techniche 2022 for the game 'Campus Rush'."
+        description: "Won 'Best Project under Software' at Techevince 2022 for the game 'Campus Rush'."
     },
     {
         id: 7,

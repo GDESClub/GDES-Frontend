@@ -100,37 +100,22 @@ export default function AboutPage() {
     const description = "GDES - the Game Development and Esports Club of IIT Guwahati, is a community of passionate gamers, developers, and designers. We aim to foster a culture of creativity and innovation in the gaming world. We organize workshops, game jams, and tournaments to help our members learn and grow their skills. Join us to create, play, and compete!";
     const scrambledDesc = useScrambleText(description);
     
-    // Scroll logic for member carousel
-    const scrollRef = useRef(null);
-    const scroll = (dir) => {
-        if(scrollRef.current) {
-            const amount = 300;
-            scrollRef.current.scrollBy({ left: dir === 'left' ? -amount : amount, behavior: 'smooth' });
-        }
-    };
-
-    // Mouse Glow Effect
-    useEffect(() => {
-        const moveLight = (e) => {
-            document.documentElement.style.setProperty('--x', `${e.clientX}px`);
-            document.documentElement.style.setProperty('--y', `${e.clientY}px`);
-        };
-        window.addEventListener('mousemove', moveLight);
-        return () => window.removeEventListener('mousemove', moveLight);
-    }, []);
-
+    
     // Data
     const leadership = [
         { name: 'Chakshu Jindal', role: 'Secretary', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1759334644/IMG_20251001_071620_-_Chakshu_jindal_f3nuvs.jpg' },
-        { name: 'Farhan Naisqq', role: 'Research Lead', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1759334657/Pfp_-_Farhan_niasqq.png' },
+        { name: 'Farhan Sheikh', role: 'Research Lead', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1759334657/Pfp_-_Farhan_niasqq.png' },
         { name: 'Armaan', role: 'eSports Head', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1759334647/Armaan_oqq95c.jpg' },
-        { name: 'ADARSH UD', role: 'Design Head', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1759334640/ADARSH_UD_qi7kxs.jpg' }
+        { name: 'ADARSH UD', role: 'Design Head', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1759334640/ADARSH_UD_qi7kxs.jpg' },
+        { name: 'Anish Mishra', role: 'eSports Head', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1765973391/WhatsApp_Image_2025-11-30_at_18.38.36_835ff85a_-_ANISH_MISHRA_vutghd.jpg' },
+        { name: 'Samarth Gupta', role: 'Web Lead', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1759335976/ProfilePhotoJuly25_xgosgl.jpg' },
     ];
     
-    const clubMembers = [
-        { name: 'Samarth Gupta', role: 'Member', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1759335976/ProfilePhotoJuly25_xgosgl.jpg' },
+    const clubMembers = [   
         { name: 'Rishi Gupta', role: 'Member', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1759334654/IMG_20250930_115243_-_Rishi_Gupta_c5znk1.jpg' },
         { name: 'Kripa Ramachandran', role: 'Member', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1759334638/IMG_20250930_112742_-_Kripa_Ramachandran_nnsiid.jpg' },
+        { name: 'Annu Kumari', role: 'Member', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1765973392/me2_-_Annu_Kumari_cb3nuo.jpg' },
+        { name: 'Akanksha', role: 'Member', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1765973393/DocScanner_Dec_29_2022_3-58_PM_-_Akanksha_ofudyt.jpg' },
         { name: 'Shaashwata Paul', role: 'Member', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1759334656/17592118118553146216642144363349_-_Shaashwata_Paul_zlz0fg.jpg' },
         { name: 'Aditya Vishwakarma', role: 'Member', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1759334654/IMG20250922112319_-_Aditya_Vishwakarma_dgevww.jpg' },
         { name: 'Charvit Rajani', role: 'Member', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1759334657/IMG_20250930_131155_-_Magestic_Plan_thyrvb.jpg' },
@@ -158,6 +143,62 @@ export default function AboutPage() {
         { name: 'Rupiga', role: 'Design' },
     ];
 
+    const infiniteMembers = [...clubMembers, ...clubMembers];
+
+    // 2. Refs for controlling animation
+    const scrollRef = useRef(null);
+    const animationRef = useRef(null);
+    const [isPaused, setIsPaused] = useState(false);
+
+    // 3. Auto-Scroll Effect
+    useEffect(() => {
+        const scrollContainer = scrollRef.current;
+        if (!scrollContainer) return;
+
+        const scrollSpeed = 0.5; // Adjust speed (higher = faster)
+
+        const animate = () => {
+            if (!isPaused && scrollContainer) {
+                scrollContainer.scrollLeft += scrollSpeed;
+
+                // Seamless Reset Logic:
+                // If we have scrolled past the first half (the original list), reset to 0
+                if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
+                    scrollContainer.scrollLeft = 0;
+                }
+            }
+            animationRef.current = requestAnimationFrame(animate);
+        };
+
+        // Start animation
+        animationRef.current = requestAnimationFrame(animate);
+
+        // Cleanup
+        return () => {
+            if (animationRef.current) cancelAnimationFrame(animationRef.current);
+        };
+    }, [isPaused]); // Re-run effect if pause state changes
+
+    // Manual Scroll Buttons (Optional: keep if you want users to skip ahead)
+    const scroll = (dir) => {
+        if(scrollRef.current) {
+            const amount = 300;
+            scrollRef.current.scrollBy({ left: dir === 'left' ? -amount : amount, behavior: 'smooth' });
+        }
+    };
+    // Scroll logic for member carousel
+    
+
+    // Mouse Glow Effect
+    useEffect(() => {
+        const moveLight = (e) => {
+            document.documentElement.style.setProperty('--x', `${e.clientX}px`);
+            document.documentElement.style.setProperty('--y', `${e.clientY}px`);
+        };
+        window.addEventListener('mousemove', moveLight);
+        return () => window.removeEventListener('mousemove', moveLight);
+    }, []);
+
     return (
         <div className="AboutPage">
             <div className="cyber-grid-bg"></div>
@@ -184,13 +225,23 @@ export default function AboutPage() {
                     </div>
 
                     {/* Carousel for Members */}
-                    <div className="members-carousel">
-                        <button className="nav-arrow left" onClick={() => scroll('left')}>‹</button>
-                        <div className="carousel-track" ref={scrollRef}>
-                            {clubMembers.map((m, i) => <MemberCard key={i} member={m} />)}
-                        </div>
-                        <button className="nav-arrow right" onClick={() => scroll('right')}>›</button>
-                    </div>
+                    <div 
+    className="members-carousel" 
+    onMouseEnter={() => setIsPaused(true)} 
+    onMouseLeave={() => setIsPaused(false)}
+>
+    <button className="nav-arrow left" onClick={() => scroll('left')}>‹</button>
+    
+    <div className="carousel-track" ref={scrollRef}>
+        {/* Render the duplicated list */}
+        {infiniteMembers.map((m, i) => (
+            // Use index in key to ensure unique keys for the duplicate items
+            <MemberCard key={`${m.name}-${i}`} member={m} />
+        ))}
+    </div>
+    
+    <button className="nav-arrow right" onClick={() => scroll('right')}>›</button>
+</div>
                 </section>
 
                 {/* 3. CREDITS & SOCIALS (SPLIT) */}

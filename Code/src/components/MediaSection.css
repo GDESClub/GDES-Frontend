@@ -126,6 +126,7 @@
 }
 
 /* --- NAVIGATION BUTTONS --- */
+/* Button Styles */
 .nav-btn {
   position: absolute;
   top: 50%;
@@ -137,26 +138,38 @@
   backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 115, 164, 0.3);
   border-radius: 50%;
-  color: var(--theme-primary);
+  color: var(--theme-primary, #ff0055); /* Fallback color if var not defined */
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
+  
+  /* Ensure they are clickable even with the mask-image above */
+  pointer-events: auto; 
 }
 
 .nav-btn:hover {
-  background: var(--theme-primary);
-  color: var(--theme-bg);
-  box-shadow: 0 0 15px var(--theme-glow);
+  background: var(--theme-primary, #ff0055);
+  color: #fff;
+  box-shadow: 0 0 15px var(--theme-glow, rgba(255, 0, 85, 0.5));
 }
 
-.nav-btn:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-  transform: translateY(-50%) scale(0.95);
+.nav-btn.left { left: 10px; }
+.nav-btn.right { right: 10px; }
+
+.carousel-wrapper {
+  position: relative;
+  /* Optional: Add a fade mask on the edges to make it look seamless */
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
 }
 
-.nav-btn.left { left: -25px; }
-.nav-btn.right { right: -25px; }
-
+.carousel {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: hidden; 
+  padding: 1rem;
+  width: 100%;
+  white-space: nowrap; 
+}
