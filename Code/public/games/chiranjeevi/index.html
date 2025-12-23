@@ -3,38 +3,197 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | Chiranjeevi</title>
-  </head>
-  <body style="text-align: center; padding: 0; border: 0; margin: 0;">
-    <canvas id="unity-canvas" width=960 height=600 style="width: 960px; height: 600px; background: #231F20"></canvas>
-    <script src="Build/chiranjeevi.loader.js"></script>
-    <script>
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        // Mobile device style: fill the whole browser client area with the game canvas:
-        var meta = document.createElement('meta');
-        meta.name = 'viewport';
-        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
-        document.getElementsByTagName('head')[0].appendChild(meta);
-
-        var canvas = document.querySelector("#unity-canvas");
-        canvas.style.width = "100%";
-        canvas.style.height = "100%";
-        canvas.style.position = "fixed";
-
-        document.body.style.textAlign = "left";
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Chiranjeevi | GDES IIT Guwahati</title>
+    <style>
+      /* --- GLOBAL STYLES --- */
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #121212; /* Neutral dark for GDES branding */
+        background-image: radial-gradient(circle at 50% 50%, #2a2a2a 0%, #000000 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        color: white;
       }
 
-      createUnityInstance(document.querySelector("#unity-canvas"), {
-        dataUrl: "Build/chiranjeevi.data.unityweb",
-        frameworkUrl: "Build/chiranjeevi.framework.js.unityweb",
-        codeUrl: "Build/chiranjeevi.wasm.unityweb",
+      /* --- GAME CONTAINER --- */
+      #unity-container {
+        position: relative;
+        width: 960px;
+        max-width: 100%;
+        aspect-ratio: 16 / 10; /* Matches your 960x600 resolution */
+        background: #000;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      #unity-canvas {
+        width: 100%;
+        height: 100%;
+        background: #231F20; /* Your original background color */
+        display: block;
+      }
+
+      /* --- LOADING SCREEN --- */
+      #unity-loading-bar {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: flex; /* Flex to center content */
+        flex-direction: column;
+        align-items: center;
+        z-index: 10;
+      }
+
+      .spinner {
+        border: 4px solid rgba(255, 255, 255, 0.1);
+        border-left: 4px solid #ff4d4d; /* Red accent for "Chiranjeevi" / Esports */
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin-bottom: 15px;
+      }
+
+      @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+      #unity-progress-bar-empty {
+        width: 200px;
+        height: 6px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 3px;
+        overflow: hidden;
+      }
+
+      #unity-progress-bar-full {
+        width: 0%;
+        height: 100%;
+        background: #ff4d4d; /* Matching Red accent */
+        transition: width 0.2s ease;
+      }
+
+      /* --- FOOTER / UI --- */
+      #unity-footer {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      #unity-fullscreen-button {
+        width: 38px;
+        height: 38px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: background-color 0.2s;
+        font-size: 20px;
+        user-select: none;
+      }
+      
+      #unity-fullscreen-button:hover {
+        background-color: rgba(255,255,255,0.25);
+      }
+      
+      #unity-fullscreen-button::after {
+        content: "⛶"; /* Unicode fullscreen icon */
+      }
+
+      /* --- MOBILE OVERRIDES --- */
+      @media (max-width: 960px) {
+         #unity-container {
+             width: 100%;
+             height: 100%; /* Fill screen on mobile */
+             border-radius: 0;
+             aspect-ratio: auto;
+         }
+      }
+    </style>
+  </head>
+  <body>
+    
+    <div id="unity-container">
+      <canvas id="unity-canvas"></canvas>
+      
+      <div id="unity-loading-bar">
+        <div class="spinner"></div>
+        <div id="unity-progress-bar-empty">
+          <div id="unity-progress-bar-full"></div>
+        </div>
+      </div>
+
+      <div id="unity-footer">
+        <div id="unity-fullscreen-button" title="Toggle Fullscreen"></div>
+      </div>
+    </div>
+
+    <script>
+      // 1. CONFIGURATION
+      // I maintained the specific .unityweb extensions from your code
+      var buildUrl = "Build";
+      var loaderUrl = buildUrl + "/chiranjeevi.loader.js";
+      
+      var config = {
+        dataUrl: buildUrl + "/chiranjeevi.data.unityweb",
+        frameworkUrl: buildUrl + "/chiranjeevi.framework.js.unityweb",
+        codeUrl: buildUrl + "/chiranjeevi.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "GameDev And Esports Club, IIT Guwahati",
         productName: "Chiranjeevi",
         productVersion: "0.5.1",
-        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
-        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
-      });
+      };
+
+      var container = document.querySelector("#unity-container");
+      var canvas = document.querySelector("#unity-canvas");
+      var loadingBar = document.querySelector("#unity-loading-bar");
+      var progressBarFull = document.querySelector("#unity-progress-bar-full");
+      var fullscreenButton = document.querySelector("#unity-fullscreen-button");
+
+      // 2. DEVICE HANDLING
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
+        
+        // Mobile specific CSS adjustments
+        container.style.width = "100%";
+        container.style.height = "100%";
+        
+        // Uncomment if you want to lower resolution on mobile for performance
+        // config.devicePixelRatio = 1; 
+      }
+
+      // 3. LOAD ENGINE
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+        }).then((unityInstance) => {
+          loadingBar.style.display = "none";
+          fullscreenButton.onclick = () => {
+            unityInstance.SetFullscreen(1);
+          };
+        }).catch((message) => {
+          alert("Unity Loading Error: " + message);
+        });
+      };
+      document.body.appendChild(script);
     </script>
   </body>
 </html>
