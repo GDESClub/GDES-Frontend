@@ -1,12 +1,7 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import "./MediaSection.css";
 
-// 1. Restore the NavArrow Component
-const NavArrow = ({ direction }) => (
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d={direction === 'left' ? "M15 18L9 12L15 6" : "M9 18L15 12L9 6"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-);
+// --- SUB-COMPONENTS ---
 
 const StatsIcon = ({ type }) => {
     const icons = {
@@ -29,8 +24,9 @@ const GameCard = ({ item, onClick }) => {
         const x = (e.clientX - left - width / 2) / (width / 2);
         const y = (e.clientY - top - height / 2) / (height / 2);
 
-        cardRef.current.style.setProperty('--rotate-y', `${x * 10}deg`);
-        cardRef.current.style.setProperty('--rotate-x', `${y * -10}deg`);
+        // Multiplier controls the intensity of the tilt
+        cardRef.current.style.setProperty('--rotate-y', `${x * 8}deg`); 
+        cardRef.current.style.setProperty('--rotate-x', `${y * -8}deg`);
     };
 
     const handleMouseLeave = () => {
@@ -62,86 +58,21 @@ const GameCard = ({ item, onClick }) => {
     );
 };
 
+// --- MAIN COMPONENT ---
 
 export const MediaSection = ({ title, items, onClick }) => {
-    // Duplicate items for the infinite loop
-    const infiniteItems = [...items, ...items];
-    const scrollRef = useRef(null);
-    const animationRef = useRef(null);
-    const [isPaused, setIsPaused] = useState(false);
-
-    // 2. Add the Manual Scroll Function back
-    const scroll = (direction) => {
-        if (scrollRef.current) {
-            const container = scrollRef.current;
-            const scrollAmount = 400; // Amount to scroll per click
-            
-            // Logic to handle "Infinite Left"
-            // If we are at the very start (0) and click left, jump to the middle first
-            if (direction === "left" && container.scrollLeft <= 0) {
-                 container.scrollLeft = container.scrollWidth / 2;
-            }
-
-            container.scrollBy({
-                left: direction === "left" ? -scrollAmount : scrollAmount,
-                behavior: "smooth"
-            });
-        }
-    };
-
-    useEffect(() => {
-        const scrollContainer = scrollRef.current;
-        if (!scrollContainer) return;
-
-        const scrollSpeed = 0.8; 
-
-        const animate = () => {
-            if (!isPaused && scrollContainer) {
-                scrollContainer.scrollLeft += scrollSpeed;
-
-                // Reset logic: seamless loop
-                if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
-                    scrollContainer.scrollLeft = 0;
-                }
-            }
-            animationRef.current = requestAnimationFrame(animate);
-        };
-
-        animationRef.current = requestAnimationFrame(animate);
-
-        return () => {
-            if (animationRef.current) cancelAnimationFrame(animationRef.current);
-        };
-    }, [isPaused, items]);
-
     return (
         <div className="media-section">
             <h2 className="section-title">{title}</h2>
             
-            <div 
-                className="carousel-wrapper"
-                onMouseEnter={() => setIsPaused(true)}
-                onMouseLeave={() => setIsPaused(false)}
-            >
-                {/* 3. Add Buttons Back */}
-                {/* We removed the disabled logic because in an infinite loop, you can always go left or right */}
-                <button className="nav-btn left" onClick={() => scroll("left")}>
-                    <NavArrow direction="left" />
-                </button>
-
-                <div className="carousel" ref={scrollRef}>
-                    {infiniteItems.map((item, index) => (
-                        <GameCard 
-                            item={item} 
-                            onClick={onClick} 
-                            key={`${item._id || item.name}-${index}`} 
-                        />
-                    ))}
-                </div>
-
-                <button className="nav-btn right" onClick={() => scroll("right")}>
-                    <NavArrow direction="right" />
-                </button>
+            <div className="media-grid">
+                {items.map((item, index) => (
+                    <GameCard 
+                        item={item} 
+                        onClick={onClick} 
+                        key={`${item._id || item.name}-${index}`} 
+                    />
+                ))}
             </div>
         </div>
     );

@@ -19,7 +19,7 @@
 .Footer {
   width: 100%;
   position: relative;
-  padding: 0 2rem;
+  padding: 0 1rem;
   box-sizing: border-box;
   margin-top: 4rem;
   height: 60px; /* Give it a fixed height */

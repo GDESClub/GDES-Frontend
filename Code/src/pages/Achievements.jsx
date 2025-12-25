@@ -119,6 +119,7 @@ export default function AchievementsPage() {
                     ))}
                 </div>
             </main>
+            <div className='footer-spacer'/>
             <Footer />
         </div>
     );

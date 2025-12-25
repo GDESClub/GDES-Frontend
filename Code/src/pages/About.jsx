@@ -87,6 +87,8 @@ const MemberCard = ({ member, isFeatured = false }) => {
                 <div className="member-details">
                     <h3>{member.name}</h3>
                     <span className="role-badge">{member.role}</span>
+                    {/* NEW: Render Tagline if it exists */}
+                    {member.tagline && <span className="member-tagline">"{member.tagline}"</span>}
                 </div>
             </div>
             <div className="holo-base"></div>
@@ -100,7 +102,10 @@ export default function AboutPage() {
     const description = "GDES - the Game Development and Esports Club of IIT Guwahati, is a community of passionate gamers, developers, and designers. We aim to foster a culture of creativity and innovation in the gaming world. We organize workshops, game jams, and tournaments to help our members learn and grow their skills. Join us to create, play, and compete!";
     const scrambledDesc = useScrambleText(description);
     
-    
+    const Founders = [
+        { name: ' Utsav Bhardwaj', tagline: 'the meta is whatever you make it', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1766644337/WhatsApp_Image_2025-12-18_at_5.53.25_PM_muy4uz.jpg' },
+        { name: 'Kaushtubh Kanishk', tagline: 'glhf', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1766644336/WhatsApp_Image_2025-12-18_at_3.46.53_PM_lg2dfy.jpg' },
+    ]
     // Data
     const leadership = [
         { name: 'Chakshu Jindal', role: 'Secretary', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1759334644/IMG_20251001_071620_-_Chakshu_jindal_f3nuvs.jpg' },
@@ -214,6 +219,18 @@ export default function AboutPage() {
                         <span className="cursor">_</span>
                     </div>
                 </section>
+                <section className="cyber-panel founders-section">
+                    <SectionHeader title="INITIATORS" iconType="star" /> {/* "Star" icon implies legacy */}
+                    <div className="founders-grid">
+                        {Founders.map((f, i) => (
+                            <MemberCard 
+                                key={i} 
+                                member={{ ...f, role: 'Founder' }} // Manually assign role 'Founder'
+                                isFeatured={true} 
+                            />
+                        ))}
+                    </div>
+                </section>
 
                 {/* 2. MEMBERS PANEL */}
                 <section className="cyber-panel members-section">
@@ -277,7 +294,7 @@ export default function AboutPage() {
                         </div>
                     </section>
                 </div>
-
+                <div className='footer-spacer'/>
             </main>
             <Footer />
         </div>

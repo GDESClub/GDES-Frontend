@@ -5,6 +5,7 @@
     --dark: #050510;
     --glass: rgba(10, 20, 40, 0.7);
     --border: rgba(0, 243, 255, 0.2);
+    --gold: #ffbd2e;
 }
 
 /* --- ANIMATIONS --- */
@@ -417,3 +418,51 @@
 .floating-hex:nth-child(4) { left: 60%; width: 150px; height: 150px; animation-duration: 30s; animation-delay: 2s; border-color: var(--theme-about-primary); }
 .floating-hex:nth-child(5) { left: 75%; width: 90px; height: 90px; animation-duration: 20s; animation-delay: 8s; }
 .floating-hex:nth-child(6) { left: 90%; width: 110px; height: 110px; animation-duration: 22s; animation-delay: 12s; }
+
+.founders-section {
+    margin-bottom: 2rem;
+    border-left: 4px solid var(--gold);
+}
+
+.founders-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+    padding: 2rem 0;
+}
+
+/* Specific Gold Overrides for Founders */
+.founders-grid .member-card .hex-svg {
+    stroke: var(--gold);
+    filter: drop-shadow(0 0 5px var(--gold));
+}
+
+.founders-grid .member-card:hover .hex-svg {
+    stroke: #fff; /* White flash on hover */
+    filter: drop-shadow(0 0 15px var(--gold));
+}
+
+.founders-grid .role-badge {
+    color: var(--gold);
+    font-weight: 800;
+}
+
+/* Tagline styling for Founders */
+.member-tagline {
+    display: block;
+    font-size: 0.8rem;
+    color: #ccc;
+    font-style: italic;
+    margin-top: 5px;
+    font-family: 'Roboto Mono', monospace;
+    opacity: 0.8;
+}
+
+/* Adjust card height slightly to fit tagline */
+.founders-grid .member-card.featured {
+    height: 360px; /* Slightly taller */
+}
+.footer-spacer{ 
+    height: 0.1rem;
+}
