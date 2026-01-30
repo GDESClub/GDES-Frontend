@@ -102,14 +102,16 @@ export default function AboutPage() {
     const description = "GDES - the Game Development and Esports Club of IIT Guwahati, is a community of passionate gamers, developers, and designers. We aim to foster a culture of creativity and innovation in the gaming world. We organize workshops, game jams, and tournaments to help our members learn and grow their skills. Join us to create, play, and compete!";
     const scrambledDesc = useScrambleText(description);
     
+    
     const Founders = [
         { name: ' Utsav Bhardwaj', tagline: 'the meta is whatever you make it', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1766644337/WhatsApp_Image_2025-12-18_at_5.53.25_PM_muy4uz.jpg' },
         { name: 'Kaushtubh Kanishk', tagline: 'glhf', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1766644336/WhatsApp_Image_2025-12-18_at_3.46.53_PM_lg2dfy.jpg' },
+        { name: 'Prayag Sahu', tagline: 'Creative highs fueled by passion', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1766644336/WhatsApp_Image_2025-12-18_at_3.46.53_PM_lg2dfy.jpg' },
     ]
     // Data
     const leadership = [
         { name: 'Chakshu Jindal', role: 'Secretary', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1759334644/IMG_20251001_071620_-_Chakshu_jindal_f3nuvs.jpg' },
-        { name: 'Farhan Sheikh', role: 'Research Lead', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1759334657/Pfp_-_Farhan_niasqq.png' },
+        //{ name: 'Farhan Sheikh', role: 'Research Lead', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1759334657/Pfp_-_Farhan_niasqq.png' },
         { name: 'Armaan', role: 'eSports Head', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1759334647/Armaan_oqq95c.jpg' },
         { name: 'ADARSH UD', role: 'Design Head', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1759334640/ADARSH_UD_qi7kxs.jpg' },
         { name: 'Anish Mishra', role: 'eSports Head', avatar: 'https://res.cloudinary.com/dvbzgoz9m/image/upload/v1765973391/WhatsApp_Image_2025-11-30_at_18.38.36_835ff85a_-_ANISH_MISHRA_vutghd.jpg' },
