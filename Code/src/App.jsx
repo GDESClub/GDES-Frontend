@@ -12,6 +12,7 @@ import AuthModal from './components/AuthController';
 import NotFoundPage from './pages/NotFound';
 import AchievementsPage from './pages/Achievements';
 import RegistrationPage from './pages/RegistrationPage';
+import { Analytics } from "@vercel/analytics/vue"
 
 function App() {
   const [showAuth, setShowAuth] = useState(false);
