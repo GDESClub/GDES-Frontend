@@ -11,6 +11,7 @@ import GamePlayerPage from './pages/GamePlayerPage';
 import AuthModal from './components/AuthController';
 import NotFoundPage from './pages/NotFound';
 import AchievementsPage from './pages/Achievements';
+import RegistrationPage from './pages/RegistrationPage';
 
 function App() {
   const [showAuth, setShowAuth] = useState(false);
@@ -32,6 +33,7 @@ function App() {
         <Route path="/play/:gameId" element={<GamePlayerPage />} />
         <Route path="*" element={<NotFoundPage />} />
         <Route path="/achievements" element={<AchievementsPage/>}/>
+        <Route path="/legacy/register" element={<RegistrationPage/>}/>
       </Routes>
 
       {showAuth && (

@@ -1,0 +1,491 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Tektur:wght@400;600;700;900&display=swap');
+
+:root {
+  --theme-primary: #FF73A4;
+  --theme-primary-hover: #ff8cb5;
+  --theme-bg: #07020b;
+  --theme-surface: rgba(18, 11, 28, 0.6);
+  --theme-border: rgba(255, 255, 255, 0.08);
+  --theme-glow: rgba(255, 115, 164, 0.4);
+  --font-special: 'Tektur', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --secondary-glow: #64faff;
+  --text-muted: #8a8494;
+}
+
+.registration-page {
+  background-color: var(--theme-bg);
+  /* Locked height to viewport to prevent outer scroll */
+  height: 100vh; 
+  /* Includes padding in the 100vh calculation */
+  box-sizing: border-box; 
+  padding: 80px 2rem 2rem 2rem; 
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-family: var(--font-body);
+  /* Hides the outer scrollbar entirely */
+  overflow: hidden; 
+}
+
+/* Ambient heavily blurred background matching the game */
+.ambient-background {
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(80px) opacity(0.3) saturate(1.5);
+  z-index: 0;
+  transition: background-image 0.6s ease-in-out;
+}
+
+/* Main premium container layout */
+.premium-wrapper {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: 100%;
+  max-width: 1300px;
+  /* Fills the available space within the locked page */
+  height: 100%; 
+  background: var(--theme-surface);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--theme-border);
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+/* --- Left Image Panel --- */
+.image-panel {
+  flex: 1.2;
+  position: relative;
+  display: none;
+  background: #000;
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  .image-panel {
+    display: block;
+  }
+}
+
+.game-poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+.fade-in {
+  animation: fadeInZoom 0.8s ease-out forwards;
+}
+
+@keyframes fadeInZoom {
+  0% { opacity: 0; transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--theme-bg) 0%, transparent 40%, rgba(0,0,0,0.3) 100%),
+              linear-gradient(to right, transparent 60%, var(--theme-bg) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 3rem;
+}
+
+.overlay-content h2 {
+  font-family: var(--font-special);
+  font-size: 5rem;
+  font-weight: 900;
+  margin: 0;
+  line-height: 0.9;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.5) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.overlay-content p {
+  font-family: var(--font-special);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--theme-primary);
+  margin: 0.5rem 0 0 0;
+  letter-spacing: 2px;
+}
+
+/* --- Right Form Panel --- */
+.form-panel {
+  flex: 1;
+  padding: 3.5rem;
+  /* Takes the full height of the wrapper */
+  height: 100%; 
+  /* Prevents padding from breaking the height */
+  box-sizing: border-box; 
+  /* Single scrollbar contained safely inside this panel */
+  overflow-y: auto; 
+  scrollbar-width: thin;
+  scrollbar-color: var(--theme-border) transparent;
+}
+
+.form-panel::-webkit-scrollbar { width: 6px; }
+.form-panel::-webkit-scrollbar-thumb { background: var(--theme-border); border-radius: 10px; }
+
+.form-header {
+  margin-bottom: 3rem;
+}
+
+.registration-title {
+  font-family: var(--font-special);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.registration-subtitle {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Typography & Sections */
+.form-section {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.form-section:last-of-type {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.step-number {
+  font-family: var(--font-special);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--theme-bg);
+  background: var(--theme-primary);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+}
+
+.section-title h3 {
+  font-family: var(--font-special);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+}
+
+.max-badge {
+  font-size: 0.75rem;
+  color: var(--secondary-glow);
+  background: rgba(100, 250, 255, 0.1);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  border: 1px solid rgba(100, 250, 255, 0.2);
+  margin-left: auto;
+}
+
+/* Inputs & Form Elements */
+.input-row {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.input-row .input-group {
+  flex: 1;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.input-group label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.input-group input,
+.select-wrapper select {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--theme-border);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input-group input::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.input-group input:focus,
+.select-wrapper select:focus {
+  outline: none;
+  background: rgba(0, 0, 0, 0.6);
+  border-color: var(--theme-primary);
+  box-shadow: 0 0 0 4px rgba(255, 115, 164, 0.1);
+}
+
+/* Custom Select Dropdown Styling */
+.select-wrapper {
+  position: relative;
+}
+.select-wrapper::after {
+  content: '▼';
+  position: absolute;
+  right: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--theme-primary);
+  pointer-events: none;
+  font-size: 0.8rem;
+}
+.select-wrapper select {
+  appearance: none;
+  cursor: pointer;
+}
+.game-select select {
+  font-family: var(--font-special);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--theme-primary);
+  border-color: rgba(255, 115, 164, 0.3);
+  background: rgba(255, 115, 164, 0.05);
+}
+
+/* Player Blocks */
+.player-block {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--theme-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.player-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.player-header h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.remove-player {
+  background: transparent;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #ff4d4d;
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.remove-player:hover {
+  background: rgba(255, 77, 77, 0.1);
+  color: #ff1a1a;
+}
+
+.add-player-btn {
+  background: transparent;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  color: #fff;
+  width: 100%;
+  padding: 1.2rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: var(--font-special);
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.add-player-btn span {
+  color: var(--theme-primary);
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.add-player-btn:hover {
+  border-color: var(--theme-primary);
+  background: rgba(255, 115, 164, 0.05);
+}
+
+/* Submit Button */
+.submit-container {
+  margin-top: 3rem;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 1.2rem;
+  border: none;
+  border-radius: 12px;
+  font-family: var(--font-special);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  background: var(--theme-primary);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 115, 164, 0.3);
+}
+
+.submit-button:hover:not(:disabled) {
+  background: var(--secondary-glow);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(100, 250, 255, 0.4);
+}
+
+.submit-button:disabled {
+  background: #333;
+  color: #666;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.submit-button.loading {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+/* Alerts */
+.error-message {
+  background: rgba(255, 77, 77, 0.1);
+  border: 1px solid rgba(255, 77, 77, 0.3);
+  color: #ff8080;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.95rem;
+}
+
+.error-icon {
+  font-size: 1.2rem;
+}
+
+/* Success State */
+.success-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  gap: 1.5rem;
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  background: rgba(100, 250, 255, 0.1);
+  border: 2px solid var(--secondary-glow);
+  color: var(--secondary-glow);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  box-shadow: 0 0 30px rgba(100, 250, 255, 0.3);
+}
+
+.success-title {
+  font-family: var(--font-special);
+  color: #fff;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.success-card p {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  /* On smaller screens, revert to a natural, single-page scroll */
+  .registration-page {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+  .premium-wrapper {
+    height: auto;
+  }
+  .form-panel {
+    height: auto;
+    overflow-y: visible;
+  }
+}
+
+@media (max-width: 768px) {
+  .registration-page {
+    padding: 80px 1rem 2rem 1rem;
+  }
+  .form-panel {
+    padding: 2rem 1.5rem;
+  }
+  .input-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  .registration-title {
+    font-size: 2rem;
+  }
+}
