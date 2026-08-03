@@ -23,6 +23,7 @@ const GAME_IMAGES = {
 const BGMI_RANKS = ['Bronze', 'Silver', 'Gold', 'Platinum', 'Diamond', 'Crown', 'Ace', 'Conqueror'];
 
 const emptyPlayer = () => ({
+  name: '',           // Added name field
   collegeEmail: '',
   rollNumber: '',
   contactNumber: ''
@@ -121,6 +122,18 @@ export default function RegistrationPage() {
             ✕ Remove
           </button>
         )}
+      </div>
+
+      {/* Added Name Input Field */}
+      <div className="input-group">
+        <label>Full Name</label>
+        <input
+          type="text"
+          required
+          placeholder="John Doe"
+          value={player.name}
+          onChange={(e) => handlePlayerChange(index, 'name', e.target.value)}
+        />
       </div>
 
       <div className="input-group">
