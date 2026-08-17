@@ -137,7 +137,7 @@ export default function RegistrationPage() {
       </div>
 
       <div className="input-group">
-        <label>College Email ID</label>
+        <label>IITG Email ID</label>
         <input
           type="email"
           required
